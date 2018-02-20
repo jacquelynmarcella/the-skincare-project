@@ -70,11 +70,24 @@ class ProductNameResults extends Component {
 
 
 class ProductDisplay extends Component {
-
   render(){
+
+    var display = this.props.data.ingredients.map((ingredient, index) => {
+      return (
+        <p>
+          Name: {ingredient.name}
+          Function: {ingredient.ingredientFunction}
+          Acne: {ingredient.acne}
+          Irritant: {ingredient.irritant}
+          Safety: {ingredient.safety}
+        </p>
+      );
+    });
+
     return(
           <div>
-            Individual product display
+            <h1>{this.props.data.name}</h1>
+            {display}
           </div>
       );
   }
