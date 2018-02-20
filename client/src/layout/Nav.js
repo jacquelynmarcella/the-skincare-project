@@ -22,7 +22,9 @@ class Nav extends Component {
 
     return(
           <nav className="nav">
-            <a href="/">Home</a>
+            <Link to="/">The Skincare Project</Link>
+            <Link to="/products">Search Products</Link>
+            <Link to="/ingredients">Ingredients</Link>
              {links}
           </nav>
       );

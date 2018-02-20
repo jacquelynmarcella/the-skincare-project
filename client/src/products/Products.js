@@ -70,6 +70,36 @@ class ProductNameResults extends Component {
 
 
 class ProductDisplay extends Component {
+  constructor(props){
+    super(props);
+  }
+
+  handleClick = (event) => {
+    event.preventDefault();
+    let selected = {
+      name: this.props.data.name,
+      ingredients: this.props.data.ingredients,
+      category: event.target.id,
+      user: this.props.user.id
+    }
+    console.log(selected,"In child");
+    let base = this;
+    axios.post('/user/products/add',{
+      data: selected
+    }).then(response => {
+      console.log("from backend",response);
+      // No page action needed here, thinking just change button classes to reflect what's added
+    }).catch(err => {
+      console.log('Error:', err)
+    })
+
+    //Doing axios call here to make this component more reusable, this should be a somewhat standalone!
+    // To do: some kind of "tooltip" to show more info on what each type is intended to be used for
+    // to do: if no user, buttons should do smoething different or not be visible
+    // To do: button classes reflect status in Database. If not doing a call, we should check this... figure out how to pass this through from both sides to make this work
+  
+  }
+
   render(){
 
     var display = this.props.data.ingredients.map((ingredient, index) => {
@@ -87,6 +117,9 @@ class ProductDisplay extends Component {
     return(
           <div>
             <h1>{this.props.data.name}</h1>
+            <button onClick={this.handleClick} id="favorites">Favorites</button>
+            <button onClick={this.handleClick} id="failures">Fails</button>
+            <button onClick={this.handleClick} id="watchlist">Watchlist</button>
             {display}
           </div>
       );
@@ -157,7 +190,7 @@ class Products extends Component {
       display = <ProductNameResults results={this.state.nameResults} handleSelect={this.handleSelect} />
     }
     else if (this.state.status === 'productdisplay') {
-      display = <ProductDisplay data={this.state.productData} />
+      display = <ProductDisplay data={this.state.productData} user={this.props.user} />
     }
 
     return(

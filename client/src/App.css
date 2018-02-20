@@ -39,9 +39,11 @@ a {
 
 /* CUSTOM STYLES */
 nav {
+  text-align: left;
 }
 
 nav a {
+  padding: 0 10px;
 }
 
 nav a:hover {
