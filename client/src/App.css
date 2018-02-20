@@ -1,5 +1,9 @@
 /* Universal styles */
 :root {
+  --font-color: #303030;
+  --violet-color: #5F00C4;
+  --lavender-color: #A8A6E6;
+  --pink-color: #FEDCFC;
   --header-font: 'Lato', sans-serif;
   --body-font: 'Scope One', serif;
 }
@@ -7,6 +11,7 @@
 body {
   font-family: var(--body-font);
   text-align: center;
+  color: var(--font-color);
 }
 
 h1, h2 {
