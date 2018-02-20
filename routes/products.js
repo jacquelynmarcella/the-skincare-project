@@ -22,7 +22,7 @@ router.post('/search', function(req, res, next){
       var products = $('.ProdName a').map(function(index, element){
         return {
           name: $(element).text(),
-          url: $(element).attr('href')
+          cosdnaId: $(element).attr('href').replace(/\.[^/.]+$/, ""),
         }
       }).get();   
       console.log(products);
@@ -33,24 +33,46 @@ router.post('/search', function(req, res, next){
 router.post('/ingredients', function(req, res, next){
   console.log("back end", req.body.data)
   var productName = req.body.data.name;
-  var searchUrl = req.body.data.url;
+  var cosdnaId = req.body.data.cosdnaId;
 
-  request('http://www.cosdna.com/eng/' + searchUrl, function(error, response, data){
+  request('http://www.cosdna.com/eng/' + cosdnaId + '.html', function(error, response, data){
     var ingredients = [];
     var $ = cheerio.load(data);
     var resultsTable = $('.iStuffTable tbody tr');
 
     for (var i=2; i<=resultsTable.length; i++) {
       var tableRow = '#pagebase > div.IngContent > div.IngResult > table > tbody > tr:nth-child(' + i + ')'
-      let ingredient = {
-        name: $(tableRow + ' > td.iStuffETitle > a').text(),
-        ingredientFunction: $(tableRow + ' > td:nth-child(2)').text(),
-        acne: $(tableRow + ' > td:nth-child(3)').text(),
-        irritant: $(tableRow + ' > td:nth-child(4)').text(),
-        safety: $(tableRow + ' > td:nth-child(5) > div').text()
+
+      // Only need to replace on valid ingredient links
+      var cosdnaIngId;
+      if ($(tableRow + ' > td.iStuffETitle > a').attr('href')) {
+        cosdnaIngId = $(tableRow + ' > td.iStuffETitle > a').attr('href').replace(/\.[^/.]+$/, "");
       }
+      else {
+        cosdnaIngId = '';
+      }
+
+      //TODO: Data cleansing function that returns ingredient array ready to pop in
+
+
+      // Need to scrap diff columns dependent on if there is a UV index column
+      var column = ($('#pagebase > div.IngContent > div.IngResult > table > tbody > tr:nth-child(1) > td:nth-child(3)').text() === "Acne") ? [3, 4, 5] : [4, 5, 6];
+
+      console.log(column);
+      var ingredientName = ($(tableRow + ' > td.iStuffETitle > a')) ? $(tableRow + ' > td.iStuffETitle > a').text() : $(tableRow + ' td.iStuffETitle').text();
+
+      var ingredient = {
+        name: ingredientName,
+        cosdnaIngId: cosdnaIngId,
+        ingredientFunction: $(tableRow + ' > td:nth-child(2)').text(),
+        acne: $(tableRow + ' > td:nth-child(' + column[0] + ')').text(),
+        irritant: $(tableRow + ' > td:nth-child(' + column[1] + ')').text(),
+        safety: $(tableRow + ' > td:nth-child(' + column[2] + ')').text()
+      }
+             
       ingredients.push(ingredient);
-      if (ingredients.length === resultsTable.length - 2) {
+
+      if (ingredients.length === resultsTable.length - 1) {
         var productData = {
           name: productName,
           ingredients: ingredients

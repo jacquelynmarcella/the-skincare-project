@@ -32,12 +32,8 @@ a {
   font-family: var(--header-font);
 }
 
+/* Nav */
 
-
-
-
-
-/* CUSTOM STYLES */
 nav {
   text-align: left;
 }
@@ -45,6 +41,20 @@ nav {
 nav a {
   padding: 0 10px;
 }
+
+
+/* Product display table */
+table {
+  width: 75%;
+  margin: 0 auto;
+  padding: 40px;
+  text-align: left;
+}
+
+
+
+
+/* CUSTOM STYLES */
 
 nav a:hover {
 
