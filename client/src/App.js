@@ -12,7 +12,6 @@ import Nav from './layout/Nav.js';
 // Page routes
 import Home from './Home.js';
 import Products from './products/Products.js';
-import Ingredients from './ingredients/Ingredients.js';
 
 // Auth routes
 import Login from './auth/Login.js';
@@ -93,8 +92,6 @@ class App extends Component {
                 () => (<Profile user={this.state.user} setFlash={this.setFlash} />)} />
               <Route path="/products" component={
                 () => (<Products user={this.state.user} setFlash={this.setFlash} />)} />
-              <Route path="/ingredients" component={
-                () => (<Ingredients user={this.state.user} setFlash={this.setFlash} />)} />
             </div>
           </div>
         </Router>

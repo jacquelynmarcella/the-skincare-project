@@ -24,7 +24,6 @@ class Nav extends Component {
           <nav className="nav">
             <Link to="/">The Skincare Project</Link>
             <Link to="/products">Search Products</Link>
-            <Link to="/ingredients">Ingredients</Link>
              {links}
           </nav>
       );

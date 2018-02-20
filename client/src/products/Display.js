@@ -33,6 +33,11 @@ class Display extends Component {
   
   }
 
+  handleFlag = (event) => {
+    event.preventDefault();
+    console.log(event.target.id, event.target.name);
+  }
+
   render(){
 
     var acneCount = 0;
@@ -40,17 +45,17 @@ class Display extends Component {
     var acneList;
 
     var irritantCount = 0;
-    var ittiatingIngredients = [];
+    var irritatingIngredients = [];
     var irritationList;
 
     var ingredientTable = this.props.data.ingredients.map((ingredient, index) => {
 
       if (parseInt(ingredient.acne) && parseInt(ingredient.acne) > 0) {
-        acneIngredients.push(ingredient.acne);
+        acneIngredients.push(ingredient.name);
         acneCount++;
       }
       if (parseInt(ingredient.irritant) && parseInt(ingredient.irritant) > 0) {
-        irritatingIngredients.push(ingredient.irritant);
+        irritatingIngredients.push(ingredient.name);
         irritantCount++;
       }
 
@@ -61,7 +66,7 @@ class Display extends Component {
           <td>{ingredient.acne}</td>
           <td>{ingredient.irritant}</td>
           <td>{ingredient.safety}</td>
-          <td>Flag</td>
+          <td><button onClick={this.handleFlag} id={ingredient.cosdnaIngId} name={ingredient.name}>Flag</button></td>
         </tr>
       );
     });
@@ -73,7 +78,7 @@ class Display extends Component {
     }
 
     if (irritatingIngredients.length > 0) {
-      irritationList = acneIngredients.map((ingredient, index) => {
+      irritationList = irritatingIngredients.map((ingredient, index) => {
         return <span>{ingredient}</span>
       })
     }

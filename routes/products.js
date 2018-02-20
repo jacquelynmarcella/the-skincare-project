@@ -44,12 +44,17 @@ router.post('/ingredients', function(req, res, next){
       var tableRow = '#pagebase > div.IngContent > div.IngResult > table > tbody > tr:nth-child(' + i + ')'
 
       // Only need to replace on valid ingredient links
+      // Need to look for text not anchor if no link
       var cosdnaIngId;
+      var ingName;
+
       if ($(tableRow + ' > td.iStuffETitle > a').attr('href')) {
         cosdnaIngId = $(tableRow + ' > td.iStuffETitle > a').attr('href').replace(/\.[^/.]+$/, "");
+        ingredientName = $(tableRow + ' > td.iStuffETitle > a').text();
       }
       else {
         cosdnaIngId = '';
+        ingredientName = $(tableRow + ' td.iStuffETitle').text();
       }
 
       //TODO: Data cleansing function that returns ingredient array ready to pop in
@@ -57,9 +62,6 @@ router.post('/ingredients', function(req, res, next){
 
       // Need to scrap diff columns dependent on if there is a UV index column
       var column = ($('#pagebase > div.IngContent > div.IngResult > table > tbody > tr:nth-child(1) > td:nth-child(3)').text() === "Acne") ? [3, 4, 5] : [4, 5, 6];
-
-      console.log(column);
-      var ingredientName = ($(tableRow + ' > td.iStuffETitle > a')) ? $(tableRow + ' > td.iStuffETitle > a').text() : $(tableRow + ' td.iStuffETitle').text();
 
       var ingredient = {
         name: ingredientName,
