@@ -13,7 +13,8 @@ class Display extends Component {
       name: this.props.data.name,
       ingredients: this.props.data.ingredients,
       category: event.target.id,
-      user: this.props.user.id
+      user: this.props.user.id,
+      cosdnaId: this.props.data.cosdnaId
     }
     console.log(selected,"In child");
     let base = this;
@@ -86,9 +87,9 @@ class Display extends Component {
     return(
           <div>
             <h1>{this.props.data.name}</h1>
-            <button onClick={this.handleClick} id="favorites">Favorites</button>
-            <button onClick={this.handleClick} id="failures">Fails</button>
-            <button onClick={this.handleClick} id="watchlist">Watchlist</button>
+            <button onClick={this.handleClick} id="favorite">Favorites</button>
+            <button onClick={this.handleClick} id="fail">Fails</button>
+            <button onClick={this.handleClick} id="watch">Watchlist</button>
 
             <p>{acneCount} that may cause acne</p>
             <p>{acneList}</p>

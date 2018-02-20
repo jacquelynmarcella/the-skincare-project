@@ -77,6 +77,7 @@ router.post('/ingredients', function(req, res, next){
       if (ingredients.length === resultsTable.length - 1) {
         var productData = {
           name: productName,
+          cosdnaId: cosdnaId,
           ingredients: ingredients
         }
         res.send(productData);
