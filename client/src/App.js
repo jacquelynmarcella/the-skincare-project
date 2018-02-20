@@ -1,11 +1,20 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
+
 import axios from 'axios';
+
+// Layout elements
 import Flash from './layout/Flash.js';
 import Footer from './layout/Footer.js';
-import Home from './Home.js';
 import Nav from './layout/Nav.js';
+
+// Page routes
+import Home from './Home.js';
+import Products from './products/Products.js';
+import Ingredients from './ingredients/Ingredients.js';
+
+// Auth routes
 import Login from './auth/Login.js';
 import Profile from './Profile.js';
 import Signup from './auth/Signup.js';
@@ -23,9 +32,9 @@ class App extends Component {
 
   getUser = () => {
     // If there is a token in localStorage
-    let token = localStorage.getItem('mernToken');
+    let token = localStorage.getItem('skincareToken');
     if (token === 'undefined' || token === null || token === '' || token === undefined) {
-      localStorage.removeItem('mernToken');
+      localStorage.removeItem('skincareToken');
       this.setState({
         token: '',
         user: null
@@ -36,7 +45,7 @@ class App extends Component {
         token: token
       }).then(response => {
         //   Store the token and user
-        localStorage.setItem('mernToken', response.data.token);
+        localStorage.setItem('skincareToken', response.data.token);
         this.setState({
           token: response.data.token,
           user: response.data.user
@@ -82,6 +91,10 @@ class App extends Component {
                 () => (<Signup user={this.state.user} setFlash={this.setFlash} updateUser={this.getUser} />)} />
               <Route path="/profile" component={
                 () => (<Profile user={this.state.user} setFlash={this.setFlash} />)} />
+              <Route path="/products" component={
+                () => (<Products user={this.state.user} setFlash={this.setFlash} />)} />
+              <Route path="/ingredients" component={
+                () => (<Ingredients user={this.state.user} setFlash={this.setFlash} />)} />
             </div>
           </div>
         </Router>

@@ -16,7 +16,7 @@ router.post('/login', function(req, res, next) {
     if(!user || !user.password){
       return res.status(403).send({
         error: true,
-        message: 'Invalid User Credentials or Bad Password!'
+        message: 'Invalid credentials'
       });
     }
     // get hashed password from document
@@ -34,7 +34,7 @@ router.post('/login', function(req, res, next) {
       // Return an error
       res.status(401).send({
         error: true,
-        message: 'Invalid Login Credentials. Try Again!'
+        message: 'Invalid credentials. Please try again.'
       });
     }
   });
@@ -47,7 +47,7 @@ router.post('/signup', function(req, res, next) {
   // Find by email
   User.findOne({ email: req.body.email }, function(err, user) {
     if (user) {
-      return res.status(400).send({error: true, message: 'Bad Request - User already exists' });
+      return res.status(400).send({error: true, message: 'Bad Request: user already exists' });
     }
     else {
       // create and save a user
@@ -58,7 +58,7 @@ router.post('/signup', function(req, res, next) {
       }, function(err, user) {
         if (err){
           console.log('DB error', err);
-          res.status(500).send({error: true, message: 'Database Error - ' + err.message});
+          res.status(500).send({error: true, message: 'Database error: ' + err.message});
         }
         else {
           // make a token & send it as JSON
@@ -77,13 +77,13 @@ router.post('/me/from/token', function(req, res, next) {
   // check header or url parameters or post parameters for token
   var token = req.body.token || req.query.token;
   if (!token) {
-    return res.status(401).send({error: true, message: 'You Must Pass a Token!'});
+    return res.status(401).send({error: true, message: 'You must pass a token'});
   }
 
   // get current user from token
   jwt.verify(token, process.env.JWT_SECRET, function(err, user) {
     if (err){
-      return res.status(500).send({ error: true, message: 'JWT Verification Error - ' + err});
+      return res.status(500).send({ error: true, message: 'JWT Verification Error: ' + err});
     }
     //return user using the id from w/in JWT
     User.findById({
@@ -91,11 +91,11 @@ router.post('/me/from/token', function(req, res, next) {
     }, function(err, user) {
       if (err){
         console.log('DB error', err);
-        return res.status(500).send({error: true, message: 'Database Error - ' + err.message});
+        return res.status(500).send({error: true, message: 'Database Error: ' + err.message});
       }
       else if(!user){
         console.log('User not found error');
-        return res.status(400).json({error: true, message: 'User Not Found!'});
+        return res.status(400).json({error: true, message: 'User not found'});
       }
       //Note: you can renew token by creating new token(i.e.
       //refresh it) w/ new expiration time at this point, but I’m
