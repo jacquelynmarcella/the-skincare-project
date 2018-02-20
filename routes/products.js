@@ -29,10 +29,37 @@ router.post('/search', function(req, res, next){
       console.log(products);
       res.send(products);
   });
-
-
-
 });
 
+router.post('/ingredients', function(req, res, next){
+  console.log("back end", req.body.data)
+  var productName = req.body.data.name;
+  var searchUrl = req.body.data.url;
+
+  request('http://www.cosdna.com/eng/' + searchUrl, function(error, response, data){
+    var ingredients = [];
+    var $ = cheerio.load(data);
+    var resultsTable = $('.iStuffTable tbody tr');
+
+    for (var i=2; i<=resultsTable.length; i++) {
+      var tableRow = '#pagebase > div.IngContent > div.IngResult > table > tbody > tr:nth-child(' + i + ')'
+      let ingredient = {
+        name: $(tableRow + ' > td.iStuffETitle > a').text(),
+        ingredientFunction: $(tableRow + ' > td:nth-child(2)').text(),
+        acne: $(tableRow + ' > td:nth-child(3)').text(),
+        irritant: $(tableRow + ' > td:nth-child(4)').text(),
+        safety: $(tableRow + ' > td:nth-child(5) > div').text()
+      }
+      ingredients.push(ingredient);
+      if (ingredients.length === resultsTable.length - 2) {
+        var productData = {
+          name: productName,
+          ingredients: ingredients
+        }
+        res.send(productData);
+      }
+    } 
+  });
+});
 
 module.exports = router;

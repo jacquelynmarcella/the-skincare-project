@@ -47,15 +47,16 @@ class ProductNameResults extends Component {
 
   handleClick = (event) => {
     event.preventDefault();
-    console.log("event",event);
-    console.log("event.target",event.target);
-    console.log("event target id inside child", event.target.id);
-    this.props.handleSelect(event);
+    let selected = {
+      name: event.target.name,
+      url: event.target.id
+    }
+    this.props.handleSelect(selected);
   }
 
   render(){
     var display = this.props.results.map((product, index) => {
-      return <button onClick={this.handleClick} id={product.url}>{product.name}</button>
+      return <button onClick={this.handleClick} id={product.url} name={product.name}>{product.name}</button>
     });
 
     return(
@@ -111,10 +112,22 @@ class Products extends Component {
   }
 
   handleSelect = (data) => {
-    console.log("event in parent",data);
-    // Axios call, will run scraper for product details
-    // Set state to loading
-    // Upon results returned, set to productdisplay
+    console.log("specific product selected: ",data);
+    this.setState({
+      status: 'loading',
+    })
+    let base = this;
+    axios.post('/products/ingredients',{
+      data: data 
+    }).then(response => {
+      console.log(response);
+      base.setState({
+        productData: response.data,
+        status: 'productdisplay'
+      })
+    }).catch(err => {
+      console.log('Error:', err)
+    })
   }
 
   render(){
