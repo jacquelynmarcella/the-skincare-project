@@ -12,14 +12,10 @@ var Product = require('../models/product');
 var Ingredient = require('../models/ingredient');
 
 router.post('/products/add', function(req, res, next){
-
-  console.log(req.body.data);
-
 	Product.findOne({
 		user: req.body.data.user,
 		cosdnaId: req.body.data.cosdnaId
 	}, function(err, product) {
-
 		if (!product) {
 			Product.create(req.body.data, function(err, product){
 				if(err){
@@ -30,9 +26,7 @@ router.post('/products/add', function(req, res, next){
 					res.send(product);
 	 			}
 			});
-
          } else if (product) {
-
          	console.log("Already in the db")
          	// If they click "favorite" button again and it's already highlighted, it removes from favorites
          	console.log(product.category, req.body.data.category)
@@ -59,6 +53,37 @@ router.post('/products/add', function(req, res, next){
             }
          }
    });
+});
+
+router.post('/ingredients/add', function(req, res, next){
+	Ingredient.findOne({
+		user: req.body.data.user,
+		name: req.body.data.name
+	}, function(err, ingredient) {
+		if (!ingredient) {
+			Ingredient.create(req.body.data, function(err, ingredient){
+				if(err){
+					console.log(err);
+	 			}
+				else {
+					console.log(ingredient,"inside db");
+					res.send(ingredient);
+	 			}
+			});
+        } else if (ingredient) {
+         	Ingredient.remove({
+         		_id: ingredient._id
+         	}, function(err, ingredient){
+         		if(err){
+         			console.log(err);
+         		}
+         		else {
+         			console.log("deleted",ingredient);
+         			res.send("deleted");
+         		}
+         	});		
+        }
+    });
 });
 
 

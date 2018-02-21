@@ -8,7 +8,7 @@ var ingredientSchema = new mongoose.Schema({
     minlength: 1,
     maxlength: 99
   },
-  userId: {
+  user: {
     type: String,
   },
   cosdnaIngId: { 

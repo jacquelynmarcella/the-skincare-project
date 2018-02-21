@@ -12,6 +12,18 @@ var User = require('../models/user');
 //Require products model
 //require ingredients model
 
+
+function trim(arr, key) {
+  var values = {};
+  return arr.filter(function(item){
+    var val = item[key];
+    var exists = values[val];
+    values[val] = true;
+    return !exists;
+  });
+}
+
+
 router.post('/search', function(req, res, next){
   console.log("back end", req.body.data)
   var search = req.body.data;
@@ -21,12 +33,13 @@ router.post('/search', function(req, res, next){
     var $ = cheerio.load(data);
       var products = $('.ProdName a').map(function(index, element){
         return {
-          name: $(element).text(),
+          name: $(element).text().toLowerCase(),
           cosdnaId: $(element).attr('href').replace(/\.[^/.]+$/, ""),
         }
       }).get();   
       console.log(products);
-      res.send(products);
+
+      res.send(trim(products, 'name'));
   });
 });
 
