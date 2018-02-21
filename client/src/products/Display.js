@@ -114,13 +114,13 @@ class Display extends Component {
     // To do: button classes reflect status in Database. If not doing a call, we should check this... figure out how to pass this through from both sides to make this work
 
   render(){
-
     return(
           <div>
             <h1>{this.props.data.name}</h1>
             <button onClick={this.handleClick} id="favorite">Favorites</button>
             <button onClick={this.handleClick} id="fail">Fails</button>
             <button onClick={this.handleClick} id="watch">Watchlist</button>
+            <p>Matching flags</p>
             <IngredientSummary ingredients={this.props.data.ingredients} user={this.props.user} handleFlag={this.handleFlag} />
             <IngredientTable ingredients={this.props.data.ingredients} user={this.props.user} handleFlag={this.handleFlag} />
           </div>

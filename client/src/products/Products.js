@@ -78,7 +78,7 @@ class Products extends Component {
   }
 
   componentDidMount() {
-    getDatabase();
+    this.getDatabase();
   }
 
   render(){

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import IngredientTable from './ingredients/IngredientTable.js'
+import Display from './products/Display.js'
 import Loading from './layout/Loading.js'
 
 class Profile extends Component {
@@ -9,7 +10,8 @@ class Profile extends Component {
     this.state = {
       products: '',
       ingredients: '',
-      status: 'loading'
+      status: 'loading',
+      selectedProduct: ''
     }
   }
 
@@ -32,6 +34,14 @@ class Profile extends Component {
     }).catch((error) => {
       console.log("An error occured", error.response.data);
     });
+  }
+
+  handleClick = (event) => {
+    console.log(event);
+    this.setState({
+      status: 'productview',
+      selectedProduct: event
+    })
   }
 
   handleFlag = (event) => {
@@ -67,9 +77,7 @@ class Profile extends Component {
       productList = this.state.products.map((product, index) => {
         return (
           <div>
-            {product.name}
-            {product.cosdnaId}
-            {product.category}
+          <button onClick={() => this.handleClick(product)}>{product.name}</button>
           </div>
         );
       }); 
@@ -94,9 +102,13 @@ class Profile extends Component {
       return (
         <div>
           <h2>{this.props.user.name}</h2>
+          {productList}
           {ingredientsTable}
         </div>
       );
+    }
+    else if (this.state.status === "productview" && this.props.user) {
+      return <Display data={this.state.selectedProduct} user={this.props.user} userIngredients={this.state.ingredients} />
     }
     else {
       return (<p>Please log in.</p>);
