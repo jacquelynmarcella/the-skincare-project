@@ -12,8 +12,30 @@ class Products extends Component {
     this.state = {
       status: 'searching',
       nameResults: '',
-      productData: ''
+      productData: '',
+      userProducts: '',
+      userIngredients: ''
     }
+  }
+
+  getDatabase = () => {
+    let base = this;     
+    axios({
+      method: 'get',
+      url: '/user/profile',
+      params: {
+        user: this.props.user.id
+      }
+    }).then((result) => {
+      console.log(result);
+      this.setState({
+        userProducts: result.data[0].products,
+        userIngredients: result.data[1].ingredients
+      })
+      console.log("state-ingredients",this.state.ingredients);
+    }).catch((error) => {
+      console.log("An error occured", error.response.data);
+    });
   }
 
   handleSubmit = (data) => {
@@ -55,6 +77,10 @@ class Products extends Component {
     })
   }
 
+  componentDidMount() {
+    getDatabase();
+  }
+
   render(){
 
     var display;
@@ -69,7 +95,7 @@ class Products extends Component {
       display = <Results results={this.state.nameResults} handleSelect={this.handleSelect} />
     }
     else if (this.state.status === 'productdisplay') {
-      display = <Display data={this.state.productData} user={this.props.user} />
+      display = <Display data={this.state.productData} user={this.props.user} userIngredients={this.state.userIngredients} />
     }
 
     return(

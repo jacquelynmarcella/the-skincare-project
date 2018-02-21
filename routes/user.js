@@ -11,6 +11,28 @@ var User = require('../models/user');
 var Product = require('../models/product');
 var Ingredient = require('../models/ingredient');
 
+router.get('/profile', function(req, res){
+	var userInfo = [];
+	Product.find({ user_id: req.body.user }, function(err, product){	
+		if (!product) {
+			userInfo.push({"products": []})
+		}
+		else {
+			userInfo.push({"products": product});
+		}		
+		Ingredient.find({ user_id: req.body.user }, function(err, ingredient){
+			if (!ingredient){
+				userInfo.push({"ingredient": []})
+			}
+			else {
+				console.log(ingredient);
+				userInfo.push({"ingredients": ingredient});
+			}	
+			res.send(userInfo);
+		})
+	})
+});
+
 router.post('/products/add', function(req, res, next){
 	Product.findOne({
 		user: req.body.data.user,
