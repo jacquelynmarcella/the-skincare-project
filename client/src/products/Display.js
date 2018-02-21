@@ -3,31 +3,14 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 
-class IngredientTable extends Component {
+class IngredientSummary extends Component {
   constructor(props){
     super(props);
   }
 
   handleFlag = (event) => {
     console.log("event",event);
-    let selected = {
-      name: event.name,
-      user: this.props.user.id,
-      cosdnaIngId: event.cosdnaIngId,
-      ingredientFunction: event.ingredientFunction,
-      acne: event.acne,
-      irritant: event.irritant,
-      safety: event.safety
-    }
-    console.log(selected,"In child");
-    let base = this;
-    axios.post('/user/ingredients/add',{
-      data: selected
-    }).then(response => {
-      console.log("from backend",response);
-    }).catch(err => {
-      console.log('Error:', err)
-    })
+    this.props.handleFlag(event);
   }
 
   render(){
@@ -38,7 +21,7 @@ class IngredientTable extends Component {
     var irritatingIngredients = [];
     var irritationList;
 
-    var ingredientTable = this.props.ingredients.map((ingredient, index) => {
+    this.props.ingredients.forEach((ingredient) => {
       if (parseInt(ingredient.acne) && parseInt(ingredient.acne) > 0) {
         acneIngredients.push(ingredient);
         acneCount++;
@@ -47,18 +30,7 @@ class IngredientTable extends Component {
         irritatingIngredients.push(ingredient);
         irritantCount++;
       }
-      return (
-        <tr>
-          <td>{ingredient.name}</td>
-          <td>{ingredient.ingredientFunction}</td>
-          <td>{ingredient.acne}</td>
-          <td>{ingredient.irritant}</td>
-          <td>{ingredient.safety}</td>
-          <td><button onClick={() => this.handleFlag(ingredient)} id={ingredient.cosdnaIngId} name={ingredient.name}>Flag</button></td>
-        </tr>
-      );
-    }); 
-
+    });
 
     if (acneIngredients.length > 0) {
       acneList = acneIngredients.map((ingredient, index) => {
@@ -78,6 +50,37 @@ class IngredientTable extends Component {
         <p>{acneList}</p>
         <p>{irritantCount} that may be irritating</p>
         <p>{irritationList}</p>
+      </div>
+    )
+  }
+}
+
+
+class IngredientTable extends Component {
+  constructor(props){
+    super(props);
+  }
+
+  handleFlag = (event) => {
+    console.log("event",event);
+    this.props.handleFlag(event);
+  }
+
+  render(){
+    var tableContents = this.props.ingredients.map((ingredient, index) => {
+      return (
+        <tr>
+          <td>{ingredient.name}</td>
+          <td>{ingredient.ingredientFunction}</td>
+          <td>{ingredient.acne}</td>
+          <td>{ingredient.irritant}</td>
+          <td>{ingredient.safety}</td>
+          <td><button onClick={() => this.handleFlag(ingredient)} id={ingredient.cosdnaIngId} name={ingredient.name}>Flag</button></td>
+        </tr>
+      );
+    }); 
+
+    return (
         <table>
           <thead>
             <tr>
@@ -90,10 +93,9 @@ class IngredientTable extends Component {
           </tr>
           </thead>
           <tbody>
-              {ingredientTable}
+              {tableContents}
           </tbody>
         </table>
-      </div>
     );
   }
 }
@@ -122,13 +124,33 @@ class Display extends Component {
     }).catch(err => {
       console.log('Error:', err)
     })
+  }
+
+  handleFlag = (event) => {
+    let selected = {
+      name: event.name,
+      user: this.props.user.id,
+      cosdnaIngId: event.cosdnaIngId,
+      ingredientFunction: event.ingredientFunction,
+      acne: event.acne,
+      irritant: event.irritant,
+      safety: event.safety
+    }
+    console.log(selected,"In parent");
+    let base = this;
+    axios.post('/user/ingredients/add',{
+      data: selected
+    }).then(response => {
+      console.log("from backend",response);
+    }).catch(err => {
+      console.log('Error:', err)
+    })
+  }
 
     //Doing axios call here to make this component more reusable, this should be a somewhat standalone!
     // To do: some kind of "tooltip" to show more info on what each type is intended to be used for
     // to do: if no user, buttons should do smoething different or not be visible
     // To do: button classes reflect status in Database. If not doing a call, we should check this... figure out how to pass this through from both sides to make this work
-  
-  }
 
   render(){
 
@@ -138,7 +160,8 @@ class Display extends Component {
             <button onClick={this.handleClick} id="favorite">Favorites</button>
             <button onClick={this.handleClick} id="fail">Fails</button>
             <button onClick={this.handleClick} id="watch">Watchlist</button>
-            <IngredientTable ingredients={this.props.data.ingredients} user={this.props.user} />
+            <IngredientSummary ingredients={this.props.data.ingredients} user={this.props.user} handleFlag={this.handleFlag} />
+            <IngredientTable ingredients={this.props.data.ingredients} user={this.props.user} handleFlag={this.handleFlag} />
           </div>
       );
   }
