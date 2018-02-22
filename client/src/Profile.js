@@ -3,6 +3,40 @@ import axios from 'axios';
 import IngredientTable from './ingredients/IngredientTable.js'
 import Display from './products/Display.js'
 import Loading from './layout/Loading.js'
+import ProductAction from './products/ProductAction.js'
+
+class ProductList extends Component {
+  constructor(props){
+    super(props);
+  }
+
+  handleClick = (event) => {
+    this.props.handleClick(this.props.product);
+  }
+
+  handleChange = (event) => {
+    let selected = {
+      name: this.props.product.name,
+      ingredients: this.props.product.ingredients,
+      category: event.target.name,
+      user: this.props.user.id,
+      cosdnaId: this.props.product.cosdnaId
+    }
+    this.props.handleChange(selected);
+  }
+
+  render(){
+    return(
+      <div>
+          <button onClick={this.handleClick}>{this.props.product.name}</button>
+          <ProductAction handleClick={this.handleChange} userProductCategory={this.props.product.category} type="favorite" />
+          <ProductAction handleClick={this.handleChange} userProductCategory={this.props.product.category} type="fail" /> 
+          <ProductAction handleClick={this.handleChange} userProductCategory={this.props.product.category} type="watch" /> 
+      </div>
+    )
+  }
+}
+
 
 class Profile extends Component {
   constructor(props){
@@ -41,6 +75,19 @@ class Profile extends Component {
     this.setState({
       status: 'productview',
       selectedProduct: event
+    })
+  }
+
+
+  handleChange = (event) => {
+    let base = this;
+    axios.post('/user/products',{
+      data: event
+    }).then(response => {
+      console.log("from backend",response);
+      this.getDatabase();
+    }).catch(err => {
+      console.log('Error:', err)
     })
   }
 
@@ -91,10 +138,7 @@ class Profile extends Component {
     if (this.state.products.length > 0){
       productList = this.state.products.map((product, index) => {
         return (
-          <div>
-          <button onClick={() => this.handleClick(product)}>{product.name}</button>
-          <button onClick={() => this.handleDelete(product)}>X</button>
-          </div>
+          <ProductList product={product} handleClick={this.handleClick} user={this.props.user} handleChange={this.handleChange} />
         );
       }); 
     }

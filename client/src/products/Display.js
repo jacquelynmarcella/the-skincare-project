@@ -3,35 +3,8 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Loading from '../layout/Loading.js'
 
+import ProductAction from './ProductAction.js'
 import IngredientTable from '../ingredients/IngredientTable.js'
-
-class ProductAction extends Component {
-  constructor(props){
-    super(props);
-  }
-
-  handleClick = (event) => {
-    console.log(event.target.id);
-    this.props.handleClick(event);
-  }
-
-  render(){
-
-    var productClass;
-    if (this.props.userProductCategory === this.props.type) {
-      productClass = "selectedCategory" 
-    }
-    else {
-      productClass = "defaultCategory";
-    }
-
-    return(
-      <button onClick={this.handleClick} id={this.props.type} className={productClass}>{this.props.type}</button>
-    )
-  }
-}
-
-
 
 class IngredientSummary extends Component {
   constructor(props){
@@ -144,7 +117,7 @@ class Display extends Component {
     let selected = {
       name: this.props.data.name,
       ingredients: this.props.data.ingredients,
-      category: event.target.id,
+      category: event.target.name,
       user: this.props.user.id,
       cosdnaId: this.props.data.cosdnaId
     }
