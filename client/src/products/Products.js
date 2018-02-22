@@ -96,7 +96,7 @@ class Products extends Component {
       display = <Results results={this.state.nameResults} handleSelect={this.handleSelect} />
     }
     else if (this.state.status === 'productdisplay') {
-      display = <Display data={this.state.productData} user={this.props.user} userIngredients={this.state.userIngredients} />
+      display = <Display data={this.state.productData} user={this.props.user} userIngredients={this.state.userIngredients} userProducts={this.state.userProducts} />
     }
 
     return(

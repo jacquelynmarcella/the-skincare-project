@@ -124,7 +124,7 @@ class Profile extends Component {
       );
     }
     else if (this.state.status === "productview" && this.props.user) {
-      return <Display data={this.state.selectedProduct} user={this.props.user} userIngredients={this.state.ingredients} tableClass="product" />
+      return <Display data={this.state.selectedProduct} user={this.props.user} userIngredients={this.state.ingredients} userProducts={this.state.products} tableClass="product" />
     }
     else {
       return (<p>Please log in.</p>);

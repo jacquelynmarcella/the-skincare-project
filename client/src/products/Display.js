@@ -4,24 +4,55 @@ import axios from 'axios';
 
 import IngredientTable from '../ingredients/IngredientTable.js'
 
+class ProductAction extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      productClass: "defaultCategory"
+    }
+  }
+
+  handleClick = (event) => {
+    console.log(event.target.id);
+    this.props.handleClick(event);
+  }
+
+  componentDidMount() {
+    if (this.props.userProductCategory === this.props.type) {
+      this.setState({
+        productClass: "selectedCategory"
+      })
+      console.log(this.props.type,this.props.userProductCategory,this.state,"inside product action")
+    }
+  }
+
+  render(){
+
+    return(
+      <button onClick={this.handleClick} id={this.props.type} className={this.state.productClass}>{this.props.type}</button>
+    )
+  }
+}
+
+
 
 class IngredientSummary extends Component {
   constructor(props){
     super(props);
   }
 
-  handleFlag = (event) => {
-    console.log("event",event);
-    this.props.handleFlag(event);
-  }
-
   render(){
     var acneCount = 0;
     var acneIngredients = [];
     var acneList;
+
     var irritantCount = 0;
     var irritatingIngredients = [];
     var irritationList;
+
+    var flagCount = 0;
+    var flaggedIngredients = [];
+    var flaggedList;
 
     this.props.ingredients.forEach((ingredient) => {
       if (parseInt(ingredient.acne) && parseInt(ingredient.acne) > 0) {
@@ -32,26 +63,50 @@ class IngredientSummary extends Component {
         irritatingIngredients.push(ingredient);
         irritantCount++;
       }
+      if (this.props.userIngredients && this.props.userIngredients.length > 0) {
+        let match = this.props.userIngredients.find(o => o.name === ingredient.name);
+        if (match){
+          flaggedIngredients.push(ingredient);
+          flagCount++;
+        }
+      }
     });
 
     if (acneIngredients.length > 0) {
       acneList = acneIngredients.map((ingredient, index) => {
-        return <span>{ingredient.name} <button onClick={() => this.handleFlag(ingredient)} id={ingredient.cosdnaIngId} name={ingredient.name}>Flag</button></span>
+        return <span className="ingredientBadge">{ingredient.name}</span>
       })
     }
 
     if (irritatingIngredients.length > 0) {
       irritationList = irritatingIngredients.map((ingredient, index) => {
-        return <span>{ingredient.name} <button onClick={() => this.handleFlag(ingredient)} id={ingredient.cosdnaIngId} name={ingredient.name}>Flag</button></span>
+        return <span className="ingredientBadge">{ingredient.name}</span>
+      })
+    }
+
+    if (flaggedIngredients.length > 0) {
+      flaggedList = flaggedIngredients.map((ingredient, index) => {
+        return <span className="ingredientBadge">{ingredient.name}</span>
       })
     }
 
     return (
-      <div>
-        <p>{acneCount} that may cause acne</p>
-        <p>{acneList}</p>
-        <p>{irritantCount} that may be irritating</p>
-        <p>{irritationList}</p>
+      <div className="flex">
+        <div className="summary">
+          <h2>Ingredients you've flagged that are in this product</h2>
+          <h1>{flagCount}</h1>
+          <p>{flaggedList}</p>
+        </div>
+        <div className="summary">
+          <h2>Potential acne causing ingredients</h2>
+          <h1>{acneCount}</h1>
+          <p>{acneList}</p>
+        </div>
+        <div className="summary">
+          <h2>Potential irritating ingredients</h2>
+          <h1>{irritantCount}</h1>
+          <p>{irritationList}</p>
+        </div>
       </div>
     )
   }
@@ -60,10 +115,29 @@ class IngredientSummary extends Component {
 class Display extends Component {
   constructor(props){
     super(props);
-    this.state = {
-      userProducts: '',
-      userIngredients: ''
-    }
+  }
+
+  newMatch(category) {
+    console.log("inside newmatch",category)
+     this.setState({
+      userProductCategory: category
+    })
+     console.log(this.state);
+  }
+
+  checkMatch() {
+    if (this.props.userProducts) {
+      var match = this.props.userProducts.find(o => o.cosdnaId === this.props.data.cosdnaId);
+      console.log("match info",match);
+      if (match) {
+        this.newMatch(match.category);
+      }
+    }  
+  }
+
+  componentDidMount(){
+    this.checkMatch();
+    console.log(this.state);
   }
 
   handleClick = (event) => {
@@ -80,7 +154,17 @@ class Display extends Component {
       data: selected
     }).then(response => {
       console.log("from backend",response);
-      // No page action needed here, thinking just change button classes to reflect what's added
+      if (response.data === "deleted") {
+        base.setState({
+          userProductCategory: ''
+        })
+      }
+      else {
+        base.setState({
+          userProductCategory: response.data.category
+        })
+        console.log(this.state);
+      }
     }).catch(err => {
       console.log('Error:', err)
     })
@@ -115,12 +199,11 @@ class Display extends Component {
   render(){
     return(
           <div>
-            <h1>{this.props.data.name}</h1>
-            <button onClick={this.handleClick} id="favorite">Favorites</button>
-            <button onClick={this.handleClick} id="fail">Fails</button>
-            <button onClick={this.handleClick} id="watch">Watchlist</button>
-            <p>Matching flags</p>
-            <IngredientSummary ingredients={this.props.data.ingredients} user={this.props.user} handleFlag={this.handleFlag} />
+            <h1 className="title">{this.props.data.name}</h1>
+            <ProductAction handleClick={this.handleClick} userProductCategory={this.state.userProductCategory} type="favorite" />
+            <ProductAction handleClick={this.handleClick} userProductCategory={this.state.userProductCategory} type="fail" /> 
+            <ProductAction handleClick={this.handleClick} userProductCategory={this.state.userProductCategory} type="watch" /> 
+            <IngredientSummary ingredients={this.props.data.ingredients} user={this.props.user} handleFlag={this.handleFlag} userIngredients={this.props.userIngredients} />
             <IngredientTable ingredients={this.props.data.ingredients} user={this.props.user} userIngredients={this.props.userIngredients} handleFlag={this.handleFlag} tableClass="product" />
           </div>
       );

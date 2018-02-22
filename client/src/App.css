@@ -32,6 +32,20 @@ a {
   font-family: var(--header-font);
 }
 
+button {
+  background: none;
+  border: 0;
+  padding: 10px;
+}
+
+button:focus {
+  outline: 0;
+}
+
+.flex {
+  display: flex;
+}
+
 /* Nav */
 
 nav {
@@ -43,9 +57,32 @@ nav a {
 }
 
 
+/* Product page */
+h1.title {
+  text-transform: capitalize;
+  font-size: 2.5em;
+  width: 75%;
+  margin: 0 auto;
+}
+.summary {
+  box-sizing: border-box;
+  display: inline-block;
+  width: 33%;
+  padding: 20px;
+  align-self: flex-start;
+}
+
+.ingredientBadge {
+  display: inline-block;
+  margin: 5px;
+  padding: 10px 15px;
+  background: var(--lavender-color);
+  border-radius: 20px;
+}
+
 /* Product display table */
 table {
-  width: 75%;
+  width: 100%;
   margin: 0 auto;
   padding: 40px;
   text-align: left;
@@ -53,27 +90,42 @@ table {
   border-collapse: collapse;
 }
 
-/* Rows with flags */
-tr {
-  transition: all 2s;
+th {
+  padding: 20px;
+  background: var(--violet-color);
+  color: white;
 }
 
-tr.flag {
-  background: var(--lavender-color);
+tr {
+  transition: all 1s;
+}
+
+.product tr.flag {
+  background: var(--pink-color);
 }
 
 td {
-  padding: 10px;
+  padding: 20px;
+  border-bottom: 1px solid var(--body-font);
 }
 
 tr.noflag {
   background: none;
 }
 
-tr.flag button {
+.defaultCategory {
+  background: none;
+}
+
+.selectedCategory {
   background: black;
   color: white;
 }
+
+
+/*.product tr.flag button {
+  color: var(--violet-color);
+}*/
 
 
 /* CUSTOM STYLES */
