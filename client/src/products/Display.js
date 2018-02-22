@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Loading from '../layout/Loading.js'
 
 import IngredientTable from '../ingredients/IngredientTable.js'
 
 class ProductAction extends Component {
   constructor(props){
     super(props);
-    this.state = {
-      productClass: "defaultCategory"
-    }
   }
 
   handleClick = (event) => {
@@ -17,19 +15,18 @@ class ProductAction extends Component {
     this.props.handleClick(event);
   }
 
-  componentDidMount() {
-    if (this.props.userProductCategory === this.props.type) {
-      this.setState({
-        productClass: "selectedCategory"
-      })
-      console.log(this.props.type,this.props.userProductCategory,this.state,"inside product action")
-    }
-  }
-
   render(){
 
+    var productClass;
+    if (this.props.userProductCategory === this.props.type) {
+      productClass = "selectedCategory" 
+    }
+    else {
+      productClass = "defaultCategory";
+    }
+
     return(
-      <button onClick={this.handleClick} id={this.props.type} className={this.state.productClass}>{this.props.type}</button>
+      <button onClick={this.handleClick} id={this.props.type} className={productClass}>{this.props.type}</button>
     )
   }
 }
@@ -115,14 +112,9 @@ class IngredientSummary extends Component {
 class Display extends Component {
   constructor(props){
     super(props);
-  }
-
-  newMatch(category) {
-    console.log("inside newmatch",category)
-     this.setState({
-      userProductCategory: category
-    })
-     console.log(this.state);
+    this.state = {
+      userProductCategory: ''
+    }
   }
 
   checkMatch() {
@@ -130,7 +122,14 @@ class Display extends Component {
       var match = this.props.userProducts.find(o => o.cosdnaId === this.props.data.cosdnaId);
       console.log("match info",match);
       if (match) {
-        this.newMatch(match.category);
+        this.setState({
+          userProductCategory: match.category
+        })
+      }
+      else {
+        this.setState({
+          userProductCategory: 'notsaved'
+        })
       }
     }  
   }
@@ -156,7 +155,7 @@ class Display extends Component {
       console.log("from backend",response);
       if (response.data === "deleted") {
         base.setState({
-          userProductCategory: ''
+          userProductCategory: 'notsaved'
         })
       }
       else {
@@ -191,22 +190,23 @@ class Display extends Component {
     })
   }
 
-    //Doing axios call here to make this component more reusable, this should be a somewhat standalone!
-    // To do: some kind of "tooltip" to show more info on what each type is intended to be used for
-    // to do: if no user, buttons should do smoething different or not be visible
-    // To do: button classes reflect status in Database. If not doing a call, we should check this... figure out how to pass this through from both sides to make this work
-
   render(){
-    return(
-          <div>
+
+    if(this.state.userProductCategory){
+      return(
+         <div>
             <h1 className="title">{this.props.data.name}</h1>
             <ProductAction handleClick={this.handleClick} userProductCategory={this.state.userProductCategory} type="favorite" />
             <ProductAction handleClick={this.handleClick} userProductCategory={this.state.userProductCategory} type="fail" /> 
             <ProductAction handleClick={this.handleClick} userProductCategory={this.state.userProductCategory} type="watch" /> 
             <IngredientSummary ingredients={this.props.data.ingredients} user={this.props.user} handleFlag={this.handleFlag} userIngredients={this.props.userIngredients} />
             <IngredientTable ingredients={this.props.data.ingredients} user={this.props.user} userIngredients={this.props.userIngredients} handleFlag={this.handleFlag} tableClass="product" />
-          </div>
-      );
+        </div>
+      )
+    }
+    else {
+      return <Loading />
+    }
   }
 }
 
