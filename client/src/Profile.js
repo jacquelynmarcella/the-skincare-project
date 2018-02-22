@@ -24,13 +24,13 @@ class Profile extends Component {
         user: this.props.user.id
       }
     }).then((result) => {
-      console.log(result);
       this.setState({
-        products: result.data[0].products,
-        ingredients: result.data[1].ingredients,
+        products: result.data[0],
+        ingredients: result.data[1],
         status: 'ready'
-
       })
+      console.log("state-ingredients",this.state.ingredients);
+      console.log("state-products",this.state.products);
     }).catch((error) => {
       console.log("An error occured", error.response.data);
     });
@@ -56,7 +56,22 @@ class Profile extends Component {
     }
     console.log(selected,"In parent");
     let base = this;
-    axios.post('/user/ingredients/add',{
+    axios.post('/user/ingredients',{
+      data: selected
+    }).then(response => {
+      this.getDatabase();
+    }).catch(err => {
+      console.log('Error:', err)
+    })
+  }
+
+  handleDelete = (event) => {
+    let selected = {
+      user: this.props.user.id,
+      cosdnaId: event.cosdnaId
+    }
+    let base = this;
+    axios.delete('/user/products', {
       data: selected
     }).then(response => {
       this.getDatabase();
@@ -78,6 +93,7 @@ class Profile extends Component {
         return (
           <div>
           <button onClick={() => this.handleClick(product)}>{product.name}</button>
+          <button onClick={() => this.handleDelete(product)}>X</button>
           </div>
         );
       }); 
@@ -89,7 +105,7 @@ class Profile extends Component {
     var ingredientsTable;
 
     if (this.state.ingredients.length > 0) {
-      ingredientsTable = <IngredientTable ingredients={this.state.ingredients} user={this.props.user} handleFlag={this.handleFlag} />
+      ingredientsTable = <IngredientTable ingredients={this.state.ingredients} user={this.props.user} handleFlag={this.handleFlag} userIngredients={this.state.ingredients} tableClass="profile" />
     }
     else {
       ingredientsTable = <p>No ingredients added.</p>
@@ -108,7 +124,7 @@ class Profile extends Component {
       );
     }
     else if (this.state.status === "productview" && this.props.user) {
-      return <Display data={this.state.selectedProduct} user={this.props.user} userIngredients={this.state.ingredients} />
+      return <Display data={this.state.selectedProduct} user={this.props.user} userIngredients={this.state.ingredients} tableClass="product" />
     }
     else {
       return (<p>Please log in.</p>);

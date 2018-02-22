@@ -75,9 +75,8 @@ class Display extends Component {
       user: this.props.user.id,
       cosdnaId: this.props.data.cosdnaId
     }
-    console.log(selected,"In child");
     let base = this;
-    axios.post('/user/products/add',{
+    axios.post('/user/products',{
       data: selected
     }).then(response => {
       console.log("from backend",response);
@@ -99,7 +98,7 @@ class Display extends Component {
     }
     console.log(selected,"In parent");
     let base = this;
-    axios.post('/user/ingredients/add',{
+    axios.post('/user/ingredients',{
       data: selected
     }).then(response => {
       console.log("from backend",response);
@@ -122,7 +121,7 @@ class Display extends Component {
             <button onClick={this.handleClick} id="watch">Watchlist</button>
             <p>Matching flags</p>
             <IngredientSummary ingredients={this.props.data.ingredients} user={this.props.user} handleFlag={this.handleFlag} />
-            <IngredientTable ingredients={this.props.data.ingredients} user={this.props.user} handleFlag={this.handleFlag} />
+            <IngredientTable ingredients={this.props.data.ingredients} user={this.props.user} userIngredients={this.props.userIngredients} handleFlag={this.handleFlag} tableClass="product" />
           </div>
       );
   }

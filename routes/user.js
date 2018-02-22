@@ -13,27 +13,28 @@ var Ingredient = require('../models/ingredient');
 
 router.get('/profile', function(req, res){
 	var userInfo = [];
-	Product.find({ user_id: req.body.user }, function(err, product){	
-		if (!product) {
-			userInfo.push({"products": []})
+	console.log(req.query.user)
+	Product.find({ user: req.query.user }, function(err, product){	
+		if (product) {
+			userInfo.push(product)
 		}
 		else {
-			userInfo.push({"products": product});
-		}		
-		Ingredient.find({ user_id: req.body.user }, function(err, ingredient){
-			if (!ingredient){
-				userInfo.push({"ingredient": []})
-			}
+			userInfo.push(null);
+		}	
+		Ingredient.find({ user: req.query.user }, function(err, ingredient){
+			if (ingredient){
+				userInfo.push(ingredient);
+				res.send(userInfo);
+			}				
 			else {
-				console.log(ingredient);
-				userInfo.push({"ingredients": ingredient});
-			}	
-			res.send(userInfo);
+				userInfo.push(null);
+				res.send(userInfo);
+			}
 		})
 	})
 });
 
-router.post('/products/add', function(req, res, next){
+router.post('/products', function(req, res, next){
 	Product.findOne({
 		user: req.body.data.user,
 		cosdnaId: req.body.data.cosdnaId
@@ -77,7 +78,28 @@ router.post('/products/add', function(req, res, next){
    });
 });
 
-router.post('/ingredients/add', function(req, res, next){
+router.delete('/products', function(req, res, next){
+	console.log(req.body);					
+	Product.findOne({
+		user: req.body.user,
+		cosdnaId: req.body.cosdnaId
+	}, function(err, product) {
+        console.log("productid", product._id)
+        Product.remove({
+        	_id: product._id
+        }, function(err, product){
+         	if(err){
+         		console.log(err);
+         	}
+         	else {
+         		console.log("deleted",product);
+         		res.send("deleted");
+         	}
+        });		       
+   });
+});
+
+router.post('/ingredients', function(req, res, next){
 	Ingredient.findOne({
 		user: req.body.data.user,
 		name: req.body.data.name

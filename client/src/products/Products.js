@@ -29,10 +29,11 @@ class Products extends Component {
     }).then((result) => {
       console.log(result);
       this.setState({
-        userProducts: result.data[0].products,
-        userIngredients: result.data[1].ingredients
+        userProducts: result.data[0],
+        userIngredients: result.data[1]
       })
       console.log("state-ingredients",this.state.ingredients);
+      console.log("state-products",this.state.products);
     }).catch((error) => {
       console.log("An error occured", error.response.data);
     });
