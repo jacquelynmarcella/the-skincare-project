@@ -78,6 +78,7 @@ h1.title {
   padding: 10px 15px;
   background: var(--lavender-color);
   border-radius: 20px;
+  font-size: .8em;
 }
 
 /* Product display table */
@@ -113,15 +114,40 @@ tr.noflag {
   background: none;
 }
 
-.defaultCategory {
-  background: none;
+
+button.defaultCategory {
+  opacity: .5;
 }
 
-.selectedCategory {
-  background: black;
-  color: white;
+button.selectedCategory {
+  color: var(--violet-color);
 }
 
+.productListItem {
+  box-sizing: border-box; 
+  display: inline-block;
+  width: 33%;
+  padding: 20px;
+}
+
+.productTitle {
+  font-family: var(--body-font);
+  font-size: 1em;
+  text-transform: capitalize;
+  width: 100%;
+}
+
+.productTitle:hover {
+  cursor: pointer;
+}
+
+.profile button.defaultCategory, .profile button.selectedCategory {
+   font-size: 1.25em;
+}
+
+.display button.defaultCategory, .display button.selectedCategory {
+  font-size: 2em;
+}
 
 /*.product tr.flag button {
   color: var(--violet-color);

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import FA from 'react-fontawesome';
 
 class ProductAction extends Component {
   constructor(props){
@@ -6,13 +7,13 @@ class ProductAction extends Component {
   }
 
   handleClick = (event) => {
-    console.log("event target name",event.target.name);
-    this.props.handleClick(event);
+    this.props.handleClick(this.props.type);
   }
 
   render(){
 
     var productClass;
+    var iconType;
     if (this.props.userProductCategory === this.props.type) {
       productClass = "selectedCategory" 
     }
@@ -20,8 +21,18 @@ class ProductAction extends Component {
       productClass = "defaultCategory";
     }
 
+    if (this.props.type === "favorite") {
+    	iconType = <FA name="heart" />;
+    }
+    else if (this.props.type === "fail") {
+    	iconType = <FA name="thumbs-down" />;
+    }
+    else if (this.props.type === "watch") {
+    	iconType = <FA name="bookmark" />;
+    }
+
     return(
-      <button onClick={this.handleClick} name={this.props.type} className={productClass}>{this.props.type}</button>
+      <button onClick={this.handleClick} className={productClass}>{iconType}</button>
     )
   }
 }

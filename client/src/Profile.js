@@ -18,7 +18,7 @@ class ProductList extends Component {
     let selected = {
       name: this.props.product.name,
       ingredients: this.props.product.ingredients,
-      category: event.target.name,
+      category: event,
       user: this.props.user.id,
       cosdnaId: this.props.product.cosdnaId
     }
@@ -27,8 +27,8 @@ class ProductList extends Component {
 
   render(){
     return(
-      <div>
-          <button onClick={this.handleClick}>{this.props.product.name}</button>
+      <div className="productListItem">
+          <button className="productTitle" onClick={this.handleClick}>{this.props.product.name}</button>
           <ProductAction handleClick={this.handleChange} userProductCategory={this.props.product.category} type="favorite" />
           <ProductAction handleClick={this.handleChange} userProductCategory={this.props.product.category} type="fail" /> 
           <ProductAction handleClick={this.handleChange} userProductCategory={this.props.product.category} type="watch" /> 
@@ -160,9 +160,11 @@ class Profile extends Component {
     }
     else if(this.state.status === "ready" && this.props.user){
       return (
-        <div>
+        <div className="profile">
           <h2>{this.props.user.name}</h2>
-          {productList}
+          <div className="flex">
+            {productList}
+          </div>
           {ingredientsTable}
         </div>
       );

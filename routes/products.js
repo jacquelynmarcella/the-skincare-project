@@ -79,7 +79,7 @@ router.post('/ingredients', function(req, res, next){
       var ingredient = {
         name: ingredientName,
         cosdnaIngId: cosdnaIngId,
-        ingredientFunction: $(tableRow + ' > td:nth-child(2)').text().replace("‧",""),
+        ingredientFunction: $(tableRow + ' > td:nth-child(2)').text().replace("‧","").split("‧").join(", "),
         acne: $(tableRow + ' > td:nth-child(' + column[0] + ')').text(),
         irritant: $(tableRow + ' > td:nth-child(' + column[1] + ')').text(),
         safety: $(tableRow + ' > td:nth-child(' + column[2] + ')').text()

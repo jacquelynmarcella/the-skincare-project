@@ -113,11 +113,10 @@ class Display extends Component {
   }
 
   handleClick = (event) => {
-    event.preventDefault();
     let selected = {
       name: this.props.data.name,
       ingredients: this.props.data.ingredients,
-      category: event.target.name,
+      category: event,
       user: this.props.user.id,
       cosdnaId: this.props.data.cosdnaId
     }
@@ -167,7 +166,7 @@ class Display extends Component {
 
     if(this.state.userProductCategory){
       return(
-         <div>
+         <div className="display">
             <h1 className="title">{this.props.data.name}</h1>
             <ProductAction handleClick={this.handleClick} userProductCategory={this.state.userProductCategory} type="favorite" />
             <ProductAction handleClick={this.handleClick} userProductCategory={this.state.userProductCategory} type="fail" /> 
