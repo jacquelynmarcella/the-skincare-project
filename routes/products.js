@@ -29,7 +29,7 @@ router.post('/search', function(req, res, next){
   var search = req.body.data;
 
   //Cheerio scrapes all products with the entered name and returns result to front end
-  request('http://www.cosdna.com/eng/product.php?q=' + search + '&s=1', function(error, response, data){
+  request('http://www.cosdna.com/eng/product.php?q=' + search + '&s=3', function(error, response, data){
     var $ = cheerio.load(data);
       var products = $('.ProdName a').map(function(index, element){
         return {
