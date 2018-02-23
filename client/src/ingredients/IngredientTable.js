@@ -11,17 +11,16 @@ class IngredientRow extends Component {
 
   handleFlag = (event) => {
     this.props.handleFlag(event);
-    checkMatch();
-      // if (this.state.flag === 'flag') {
-      //   this.setState({
-      //     flag: 'noflag'
-      //   })
-      // }
-      // else {
-      //   this.setState({
-      //     flag: 'flag'
-      //   })
-      // }  
+    if (this.state.flag === 'flag') {
+      this.setState({
+        flag: 'noflag'
+      })
+    }
+    else {
+      this.setState({
+        flag: 'flag'
+      })
+    }  
   }
 
   checkMatch() {
@@ -45,11 +44,12 @@ class IngredientRow extends Component {
   render(){
 
     var actionIcon;
-    if (this.state.flag === "noflag"){
-      actionIcon = <FA name="plus" />;
-    }
-    else if(this.state.flag === "flag"){
+
+    if(this.state.flag === "flag" || this.props.tableClass === "profile"){
       actionIcon = <FA name="minus" />;
+    }
+    else if (this.state.flag === "noflag"){
+      actionIcon = <FA name="plus" />;
     }
 
     return(
@@ -82,7 +82,7 @@ class IngredientTable extends Component {
   render(){
     var tableContents = this.props.ingredients.map((ingredient, index) => {   
       return (
-        <IngredientRow ingredient={ingredient} userIngredients={this.props.userIngredients} handleFlag={this.props.handleFlag} />
+        <IngredientRow ingredient={ingredient} userIngredients={this.props.userIngredients} handleFlag={this.props.handleFlag} tableClass={this.props.tableClass} />
       );
     }); 
 

@@ -44,7 +44,8 @@ class Profile extends Component {
     this.state = {
       products: '',
       ingredients: '',
-      status: 'loading',
+      loading: true,
+      view: 'profile',
       selectedProduct: ''
     }
   }
@@ -61,7 +62,7 @@ class Profile extends Component {
       this.setState({
         products: result.data[0],
         ingredients: result.data[1],
-        status: 'ready'
+        loading: false
       })
       console.log("state-ingredients",this.state.ingredients);
       console.log("state-products",this.state.products);
@@ -73,7 +74,7 @@ class Profile extends Component {
   handleClick = (event) => {
     console.log(event);
     this.setState({
-      status: 'productview',
+      view: 'product',
       selectedProduct: event
     })
   }
@@ -155,10 +156,10 @@ class Profile extends Component {
       ingredientsTable = <p>No ingredients added.</p>
     }
 
-    if(this.state.status === "loading") {
+    if(this.state.loading === true) {
       return ( <Loading /> )
     }
-    else if(this.state.status === "ready" && this.props.user){
+    else if(this.state.loading === false && this.state.view === "profile" && this.props.user){
       return (
         <div className="profile">
           <h2>{this.props.user.name}</h2>
@@ -169,7 +170,7 @@ class Profile extends Component {
         </div>
       );
     }
-    else if (this.state.status === "productview" && this.props.user) {
+    else if (this.state.loading === false && this.state.view === "product" && this.props.user) {
       return <Display data={this.state.selectedProduct} user={this.props.user} userIngredients={this.state.ingredients} userProducts={this.state.products} tableClass="product" />
     }
     else {
