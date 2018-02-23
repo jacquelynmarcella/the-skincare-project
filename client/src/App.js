@@ -79,7 +79,7 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
-          <div>
+          <div className="space">
             <Nav user={this.state.user} updateUser={this.getUser} />
             <div className="space">
               <Flash flashType={this.state.flashType} flash={this.state.flash} setFlash={this.setFlash} cancelFlash={this.cancelFlash} />

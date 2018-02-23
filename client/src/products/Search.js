@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import FA from 'react-fontawesome';
 
 class Search extends Component {
   constructor(props){
@@ -27,8 +27,9 @@ class Search extends Component {
           <div>
           <h2>Search for a product</h2>
             <form onSubmit={this.handleSubmit}>
-                <input name="product" placeholder="e.g. Clinique Mositurizer" onChange={this.handleChange} value={this.state.product} />
-            <input type="submit" value="Search" />
+                <div className="searchBar">
+                  <FA name="search" /> <input name="product" placeholder="e.g. Clinique Mositurizer" onChange={this.handleChange} value={this.state.product} />
+                </div>
             </form>
           </div>
       );

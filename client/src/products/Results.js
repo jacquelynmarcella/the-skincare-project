@@ -18,12 +18,15 @@ class Results extends Component {
 
   render(){
     var display = this.props.results.map((product, index) => {
-      return <button onClick={this.handleClick} id={product.cosdnaId} name={product.name}>{product.name}</button>
+      return <button className="productResult" onClick={this.handleClick} id={product.cosdnaId} name={product.name}>{product.name}</button>
     });
+
+    var length = this.props.results.length;
 
     return(
           <div>
             <h2>Product name results</h2>
+            <h3>{length} products found</h3>
               {display}
           </div>
       );

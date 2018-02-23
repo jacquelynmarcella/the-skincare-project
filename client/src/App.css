@@ -14,6 +14,12 @@ body {
   color: var(--font-color);
 }
 
+.space {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
 h1, h2 {
   font-family: var(--header-font);
 }
@@ -147,6 +153,49 @@ button.selectedCategory {
 
 .display button.defaultCategory, .display button.selectedCategory {
   font-size: 2em;
+}
+
+button.defaultCategory:hover, button.selectedCategory:hover {
+   cursor: pointer;
+   color: var(--lavender-color);
+   transform: scale(1.2);
+}
+
+.searchBar {
+  width: 50%;
+  border: 2px solid lightgrey;
+  margin: 0 auto;
+  text-align: left;
+  padding: 20px;
+}
+
+.searchBar input {
+  border: 0;
+  width: 80%;
+  font-size: 1.5em;
+  margin-left: 20px;
+  font-family: var(--body-font);
+}
+
+input:focus {
+  outline: 0;
+}
+
+.productResult {
+  font-family: var(--body-font);
+  padding: 10px;
+  display: inline-block;
+  width: 20%;
+  text-transform: capitalize;
+  box-sizing: border-box;
+  padding: 40px;
+  font-size: 1em;
+  min-height: 100px;
+}
+
+.productResult:hover {
+  background: var(--pink-color);
+  cursor: pointer;
 }
 
 /*.product tr.flag button {
