@@ -11,6 +11,7 @@ class Products extends Component {
     super(props);
     this.state = {
       status: 'searching',
+      searchTerm: '',
       nameResults: '',
       productData: '',
       userProducts: '',
@@ -42,7 +43,8 @@ class Products extends Component {
   handleSubmit = (data) => {
     console.log("form submitted: ",data);
     this.setState({
-      status: 'loading'
+      status: 'loading',
+      searchTerm: data
     })
     let base = this;
     axios.post('/products/search',{
@@ -93,7 +95,7 @@ class Products extends Component {
       display = <Loading />
     }
     else if (this.state.status === 'nameresults') {
-      display = <Results results={this.state.nameResults} handleSelect={this.handleSelect} />
+      display = <Results results={this.state.nameResults} handleSelect={this.handleSelect} searchTerm={this.state.searchTerm} />
     }
     else if (this.state.status === 'productdisplay') {
       display = <Display data={this.state.productData} user={this.props.user} userIngredients={this.state.userIngredients} userProducts={this.state.userProducts} />

@@ -54,7 +54,7 @@ class IngredientRow extends Component {
 
     return(
         <tr className={this.state.flag}>
-          <td><button onClick={() => this.handleFlag(this.props.ingredient)} id={this.props.ingredient.cosdnaIngId} name={this.props.ingredient.name} className="flagButton">{actionIcon}</button></td>
+          <td><button onClick={() => this.handleFlag(this.props.ingredient)} id={this.props.ingredient.cosdna} name={this.props.ingredient.name} className="flagButton">{actionIcon}</button></td>
           <td>{this.props.ingredient.name}</td>
           <td>{this.props.ingredient.ingredientFunction}</td>
           <td>{this.props.ingredient.acne}</td>
@@ -89,7 +89,7 @@ class IngredientTable extends Component {
         <table className={this.props.tableClass}>
           <thead>
             <tr>
-              <th><center><FA name="flag" /></center></th>
+              <th><FA name="flag" /></th>
               <th>Ingredient</th>
               <th>Function</th>
               <th>Acne</th>

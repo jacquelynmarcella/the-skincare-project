@@ -92,7 +92,7 @@ class Display extends Component {
 
   checkMatch() {
     if (this.props.userProducts) {
-      var match = this.props.userProducts.find(o => o.cosdnaId === this.props.data.cosdnaId);
+      var match = this.props.userProducts.find(o => o.cosdna === this.props.data.cosdna);
       console.log("match info",match);
       if (match) {
         this.setState({
@@ -118,7 +118,7 @@ class Display extends Component {
       ingredients: this.props.data.ingredients,
       category: event,
       user: this.props.user.id,
-      cosdnaId: this.props.data.cosdnaId
+      cosdna: this.props.data.cosdna
     }
     let base = this;
     axios.post('/user/products',{
@@ -145,7 +145,7 @@ class Display extends Component {
     let selected = {
       name: event.name,
       user: this.props.user.id,
-      cosdnaIngId: event.cosdnaIngId,
+      cosdna: event.cosdna,
       ingredientFunction: event.ingredientFunction,
       acne: event.acne,
       irritant: event.irritant,
@@ -168,9 +168,12 @@ class Display extends Component {
       return(
          <div className="display">
             <h1 className="title">{this.props.data.name}</h1>
-            <ProductAction handleClick={this.handleClick} userProductCategory={this.state.userProductCategory} type="favorite" />
-            <ProductAction handleClick={this.handleClick} userProductCategory={this.state.userProductCategory} type="fail" /> 
-            <ProductAction handleClick={this.handleClick} userProductCategory={this.state.userProductCategory} type="watch" /> 
+            <center>
+              <ProductAction handleClick={this.handleClick} userProductCategory={this.state.userProductCategory} type="favorite" />
+              <ProductAction handleClick={this.handleClick} userProductCategory={this.state.userProductCategory} type="fail" /> 
+              <ProductAction handleClick={this.handleClick} userProductCategory={this.state.userProductCategory} type="watch" />
+            <hr /> 
+            </center>
             <IngredientSummary ingredients={this.props.data.ingredients} user={this.props.user} handleFlag={this.handleFlag} userIngredients={this.props.userIngredients} />
             <IngredientTable ingredients={this.props.data.ingredients} user={this.props.user} userIngredients={this.props.userIngredients} handleFlag={this.handleFlag} tableClass="product" />
         </div>

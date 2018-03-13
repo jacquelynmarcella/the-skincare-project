@@ -20,7 +20,7 @@ class ProductList extends Component {
       ingredients: this.props.product.ingredients,
       category: event,
       user: this.props.user.id,
-      cosdnaId: this.props.product.cosdnaId
+      cosdna: this.props.product.cosdna
     }
     this.props.handleChange(selected);
   }
@@ -96,7 +96,7 @@ class Profile extends Component {
     let selected = {
       name: event.name,
       user: this.props.user.id,
-      cosdnaIngId: event.cosdnaIngId,
+      cosdna: event.cosdna,
       ingredientFunction: event.ingredientFunction,
       acne: event.acne,
       irritant: event.irritant,
@@ -116,7 +116,7 @@ class Profile extends Component {
   handleDelete = (event) => {
     let selected = {
       user: this.props.user.id,
-      cosdnaId: event.cosdnaId
+      cosdna: event.cosdna
     }
     let base = this;
     axios.delete('/user/products', {
@@ -128,8 +128,10 @@ class Profile extends Component {
     })
   }
 
-  componentDidMount() {
-    this.getDatabase();
+  componentDidMount(){
+    if(this.props.user){
+      this.getDatabase();
+    }
   }
 
   render(){
@@ -163,6 +165,7 @@ class Profile extends Component {
       return (
         <div className="profile">
           <h2>{this.props.user.name}</h2>
+          <hr /> 
           <div className="flex">
             {productList}
           </div>

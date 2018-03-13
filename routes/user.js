@@ -37,7 +37,7 @@ router.get('/profile', function(req, res){
 router.post('/products', function(req, res, next){
 	Product.findOne({
 		user: req.body.data.user,
-		cosdnaId: req.body.data.cosdnaId
+		cosdna: req.body.data.cosdna
 	}, function(err, product) {
 		if (!product) {
 			Product.create(req.body.data, function(err, product){
@@ -82,7 +82,7 @@ router.delete('/products', function(req, res, next){
 	console.log(req.body);					
 	Product.findOne({
 		user: req.body.user,
-		cosdnaId: req.body.cosdnaId
+		cosdna: req.body.cosdna
 	}, function(err, product) {
         console.log("productid", product._id)
         Product.remove({
@@ -102,7 +102,7 @@ router.delete('/products', function(req, res, next){
 router.post('/ingredients', function(req, res, next){
 	Ingredient.findOne({
 		user: req.body.data.user,
-		name: req.body.data.name
+		cosdna: req.body.data.cosdna
 	}, function(err, ingredient) {
 		if (!ingredient) {
 			Ingredient.create(req.body.data, function(err, ingredient){

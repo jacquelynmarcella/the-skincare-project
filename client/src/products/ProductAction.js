@@ -32,7 +32,7 @@ class ProductAction extends Component {
     }
 
     return(
-      <button onClick={this.handleClick} className={productClass}>{iconType}</button>
+      <button aria-label={this.props.type} onClick={this.handleClick} className={productClass} alt={this.props.type}>{iconType}</button>
     )
   }
 }

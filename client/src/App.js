@@ -79,19 +79,19 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
-          <div className="space">
+          <div>
             <Nav user={this.state.user} updateUser={this.getUser} />
             <div className="space">
               <Flash flashType={this.state.flashType} flash={this.state.flash} setFlash={this.setFlash} cancelFlash={this.cancelFlash} />
               <Route exact path="/" component={Home} />
               <Route path="/login" component={
-                () => (<Login user={this.state.user} setFlash={this.setFlash} updateUser={this.getUser} />)} />
+                  () => (<Login user={this.state.user} setFlash={this.setFlash} updateUser={this.getUser} />)} />
               <Route path="/signup" component={
-                () => (<Signup user={this.state.user} setFlash={this.setFlash} updateUser={this.getUser} />)} />
+                  () => (<Signup user={this.state.user} setFlash={this.setFlash} updateUser={this.getUser} />)} />
               <Route path="/profile" component={
-                () => (<Profile user={this.state.user} setFlash={this.setFlash} />)} />
+                  () => (<Profile user={this.state.user} setFlash={this.setFlash} />)} />
               <Route path="/products" component={
-                () => (<Products user={this.state.user} setFlash={this.setFlash} />)} />
+                  () => (<Products user={this.state.user} setFlash={this.setFlash} />)} />
             </div>
           </div>
         </Router>

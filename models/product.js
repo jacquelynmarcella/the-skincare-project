@@ -11,7 +11,7 @@ var productSchema = new mongoose.Schema({
   user: {
     type: String
   },
-  cosdnaId: { 
+  cosdna: { 
     type: String
   },
   ingredients: {

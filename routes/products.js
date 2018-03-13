@@ -34,7 +34,7 @@ router.post('/search', function(req, res, next){
       var products = $('.ProdName a').map(function(index, element){
         return {
           name: $(element).text().toLowerCase(),
-          cosdnaId: $(element).attr('href').replace(/\.[^/.]+$/, ""),
+          cosdna: $(element).attr('href').replace(/\.[^/.]+$/, ""),
         }
       }).get();   
       console.log(products);
@@ -46,9 +46,9 @@ router.post('/search', function(req, res, next){
 router.post('/ingredients', function(req, res, next){
   console.log("back end", req.body.data)
   var productName = req.body.data.name;
-  var cosdnaId = req.body.data.cosdnaId;
+  var cosdna = req.body.data.cosdna;
 
-  request('http://www.cosdna.com/eng/' + cosdnaId + '.html', function(error, response, data){
+  request('http://www.cosdna.com/eng/' + cosdna + '.html', function(error, response, data){
     var ingredients = [];
     var $ = cheerio.load(data);
     var resultsTable = $('.iStuffTable tbody tr');
@@ -58,15 +58,15 @@ router.post('/ingredients', function(req, res, next){
 
       // Only need to replace on valid ingredient links
       // Need to look for text not anchor if no link
-      var cosdnaIngId;
+      var cosdna;
       var ingName;
 
       if ($(tableRow + ' > td.iStuffETitle > a').attr('href')) {
-        cosdnaIngId = $(tableRow + ' > td.iStuffETitle > a').attr('href').replace(/\.[^/.]+$/, "");
+        cosdna = $(tableRow + ' > td.iStuffETitle > a').attr('href').replace(/\.[^/.]+$/, "");
         ingredientName = $(tableRow + ' > td.iStuffETitle > a').text();
       }
       else {
-        cosdnaIngId = '';
+        cosdna = '';
         ingredientName = $(tableRow + ' td.iStuffETitle').text();
       }
 
@@ -78,7 +78,7 @@ router.post('/ingredients', function(req, res, next){
 
       var ingredient = {
         name: ingredientName,
-        cosdnaIngId: cosdnaIngId,
+        cosdna: cosdna,
         ingredientFunction: $(tableRow + ' > td:nth-child(2)').text().replace("‧","").split("‧").join(", "),
         acne: $(tableRow + ' > td:nth-child(' + column[0] + ')').text(),
         irritant: $(tableRow + ' > td:nth-child(' + column[1] + ')').text(),
@@ -90,7 +90,7 @@ router.post('/ingredients', function(req, res, next){
       if (ingredients.length === resultsTable.length - 1) {
         var productData = {
           name: productName,
-          cosdnaId: cosdnaId,
+          cosdna: cosdna,
           ingredients: ingredients
         }
         res.send(productData);
