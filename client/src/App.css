@@ -196,18 +196,18 @@ tr:nth-child(even), tr.noflag:nth-child(even) {
 }
 
 button.defaultCategory {
-  color: var(--font-color);
+  color: white;
 }
 
 button.selectedCategory {
-  color: white;
+  color: var(--font-color);
 }
 
 .profile button.defaultCategory, .profile button.selectedCategory {
     background: white;
     border-radius: 100px;
     width: 35px;
-    margin: 20px 2px;
+    margin: 20px 2px 30px 2px;
     height: 35px;
     font-size: .75em;
 }
@@ -351,6 +351,7 @@ input:focus {
 
   h1.title {
     width: 90%;
+    font-size: 2em;
   }
 
   .searchBar {
@@ -367,6 +368,10 @@ input:focus {
 
   .summary, .productResult, .productListItem {
     width: 95%;
+  }
+
+  .summary {
+    padding: 10px 5px;
   }
 
   table {

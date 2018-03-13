@@ -128,6 +128,15 @@ class Profile extends Component {
     })
   }
 
+  handleBack = () => {
+    if (this.state.status === "product") {
+      this.setState({
+        view: 'profile',
+        selectedProduct: ''     
+      })
+    }
+  }
+
   componentDidMount(){
     if(this.props.user){
       this.getDatabase();
@@ -137,6 +146,7 @@ class Profile extends Component {
   render(){
 
     var productList;
+    var productCount = 0;
 
     if (this.state.products.length > 0){
       productList = this.state.products.map((product, index) => {
@@ -144,37 +154,48 @@ class Profile extends Component {
           <ProductList product={product} handleClick={this.handleClick} user={this.props.user} handleChange={this.handleChange} />
         );
       }); 
+      productCount = {this.state.products.length}
     }
     else {
       productList = <p>No products added.</p>
     }
 
     var ingredientsTable;
+    var ingredientCount = 0;
 
     if (this.state.ingredients.length > 0) {
       ingredientsTable = <IngredientTable ingredients={this.state.ingredients} user={this.props.user} handleFlag={this.handleFlag} userIngredients={this.state.ingredients} tableClass="profile" />
+      ingredientCount = {this.state.ingredients.length}
     }
     else {
       ingredientsTable = <p>No ingredients added.</p>
     }
 
-    if(this.state.loading === true) {
+    if(this.state.loading === true && this.props.user) {
       return ( <Loading /> )
     }
     else if(this.state.loading === false && this.state.view === "profile" && this.props.user){
       return (
         <div className="profile">
-          <h2>{this.props.user.name}</h2>
+          <h1>{this.props.user.name}</h1>
           <hr /> 
+          <h2>{productCount} Products saved</h2>
           <div className="flex">
             {productList}
           </div>
+          <hr />
+          <h2>{ingredientCount} Ingredients flagged</h2>
           {ingredientsTable}
         </div>
       );
     }
     else if (this.state.loading === false && this.state.view === "product" && this.props.user) {
-      return <Display data={this.state.selectedProduct} user={this.props.user} userIngredients={this.state.ingredients} userProducts={this.state.products} tableClass="product" />
+      return (
+        <div>
+          <button onClick={this.handleBack} className="back">Back</button>
+          <Display data={this.state.selectedProduct} user={this.props.user} userIngredients={this.state.ingredients} userProducts={this.state.products} tableClass="product" />
+        </div>
+      )
     }
     else {
       return (<p>Please log in.</p>);

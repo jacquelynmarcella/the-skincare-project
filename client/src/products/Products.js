@@ -80,6 +80,22 @@ class Products extends Component {
     })
   }
 
+  handleBack = () => {
+    if (this.state.status === "nameresults") {
+      this.setState({
+        status: 'searching',
+        searchTerm: '',
+        nameResults: '',
+      })
+    }
+    else if (this.state.status === "productdisplay") {
+      this.setState({
+        status: 'nameresults',
+        productData: ''
+      })
+    }
+  }
+
   componentDidMount() {
     this.getDatabase();
   }
@@ -95,10 +111,20 @@ class Products extends Component {
       display = <Loading />
     }
     else if (this.state.status === 'nameresults') {
-      display = <Results results={this.state.nameResults} handleSelect={this.handleSelect} searchTerm={this.state.searchTerm} />
+      display = (
+        <div> 
+          <button onClick={this.handleBack} className="back">Back</button>
+          <Results results={this.state.nameResults} searchTerm={this.state.searchTerm} handleSelect={this.handleSelect} />
+        </div>
+      );
     }
     else if (this.state.status === 'productdisplay') {
-      display = <Display data={this.state.productData} user={this.props.user} userIngredients={this.state.userIngredients} userProducts={this.state.userProducts} />
+      display = ( 
+        <div>
+          <button onClick={this.handleBack} className="back">Back</button>
+          <Display data={this.state.productData} user={this.props.user} userIngredients={this.state.userIngredients} userProducts={this.state.userProducts} />
+        </div>
+      );     
     }
 
     return(
