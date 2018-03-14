@@ -286,6 +286,16 @@ input:focus {
   cursor: pointer;
 }
 
+button.back {
+  background: var(--font-color);
+  color: white;
+  border-radius: 20px;
+}
+
+button.back:hover {
+  cursor: pointer;
+}
+
 
 
 /* CUSTOM STYLES */

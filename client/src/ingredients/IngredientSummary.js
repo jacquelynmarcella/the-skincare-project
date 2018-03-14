@@ -47,7 +47,7 @@ class IngredientSummary extends Component {
     if (irritatingIngredients.length > 0) {
       irritationList = irritatingIngredients.map((ingredient, index) => {
         var quickLink = "#" + ingredient.name
-        return <a href={quickLink}><span className="ingredientBadge"><a href={quickLink}>{ingredient.name}</a></span>
+        return <span className="ingredientBadge"><a href={quickLink}>{ingredient.name}</a></span>
       })
     }
 
@@ -59,7 +59,7 @@ class IngredientSummary extends Component {
     }
 
     if (this.props.user){
-      var flaggedSection = (
+      flaggedSection = (
         <div className="summary">
           <h1>{flagCount}</h1>
           <h2>Flagged ingredients</h2>
@@ -82,7 +82,7 @@ class IngredientSummary extends Component {
           <p>{irritationList}</p>
         </div>
       </div>
-    )
+    );
   }
 }
 
