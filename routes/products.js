@@ -58,15 +58,15 @@ router.post('/ingredients', function(req, res, next){
 
       // Only need to replace on valid ingredient links
       // Need to look for text not anchor if no link
-      var cosdna;
+      var cosdnaIng;
       var ingName;
 
       if ($(tableRow + ' > td.iStuffETitle > a').attr('href')) {
-        cosdna = $(tableRow + ' > td.iStuffETitle > a').attr('href').replace(/\.[^/.]+$/, "");
+        cosdnaIng = $(tableRow + ' > td.iStuffETitle > a').attr('href').replace(/\.[^/.]+$/, "");
         ingredientName = $(tableRow + ' > td.iStuffETitle > a').text();
       }
       else {
-        cosdna = '';
+        cosdnaIng = '';
         ingredientName = $(tableRow + ' td.iStuffETitle').text();
       }
 
@@ -78,7 +78,7 @@ router.post('/ingredients', function(req, res, next){
 
       var ingredient = {
         name: ingredientName,
-        cosdna: cosdna,
+        cosdna: cosdnaIng,
         ingredientFunction: $(tableRow + ' > td:nth-child(2)').text().replace("‧","").split("‧").join(", "),
         acne: $(tableRow + ' > td:nth-child(' + column[0] + ')').text(),
         irritant: $(tableRow + ' > td:nth-child(' + column[1] + ')').text(),

@@ -20,24 +20,26 @@ class Products extends Component {
   }
 
   getDatabase = () => {
-    let base = this;     
-    axios({
-      method: 'get',
-      url: '/user/profile',
-      params: {
-        user: this.props.user.id
-      }
-    }).then((result) => {
-      console.log(result);
-      this.setState({
-        userProducts: result.data[0],
-        userIngredients: result.data[1]
-      })
-      console.log("state-ingredients",this.state.ingredients);
-      console.log("state-products",this.state.products);
-    }).catch((error) => {
-      console.log("An error occured", error.response.data);
-    });
+    let base = this;
+    if (this.props.user) {
+      axios({
+        method: 'get',
+        url: '/user/profile',
+        params: {
+          user: this.props.user.id
+        }
+      }).then((result) => {
+        console.log(result);
+        this.setState({
+          userProducts: result.data[0],
+          userIngredients: result.data[1]
+        })
+        console.log("state-ingredients",this.state.ingredients);
+        console.log("state-products",this.state.products);
+      }).catch((error) => {
+        console.log("An error occured", error.response.data);
+      });
+    }     
   }
 
   handleSubmit = (data) => {
