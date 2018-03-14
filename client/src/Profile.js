@@ -149,11 +149,12 @@ class Profile extends Component {
         <div className="profile">
           <h1>{this.props.user.name}</h1>
           <hr /> 
-          <h2>{productCount} Products saved</h2>
-          <div className="flex">
-            {productList}
+          <div class="section">
+            <h2>{productCount} Products saved</h2>
+            <div className="flex">
+              {productList}
+            </div>
           </div>
-          <hr />
           <h2>{ingredientCount} Ingredients flagged</h2>
           {ingredientsTable}
         </div>
