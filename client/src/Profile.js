@@ -3,40 +3,7 @@ import axios from 'axios';
 import IngredientTable from './ingredients/IngredientTable.js'
 import Display from './products/Display.js'
 import Loading from './layout/Loading.js'
-import ProductAction from './products/ProductAction.js'
-
-class ProductList extends Component {
-  constructor(props){
-    super(props);
-  }
-
-  handleClick = (event) => {
-    this.props.handleClick(this.props.product);
-  }
-
-  handleChange = (event) => {
-    let selected = {
-      name: this.props.product.name,
-      ingredients: this.props.product.ingredients,
-      category: event,
-      user: this.props.user.id,
-      cosdna: this.props.product.cosdna
-    }
-    this.props.handleChange(selected);
-  }
-
-  render(){
-    return(
-      <div className="productListItem">
-          <button className="productTitle" onClick={this.handleClick}>{this.props.product.name}</button>
-          <ProductAction handleClick={this.handleChange} userProductCategory={this.props.product.category} type="favorite" />
-          <ProductAction handleClick={this.handleChange} userProductCategory={this.props.product.category} type="fail" /> 
-          <ProductAction handleClick={this.handleChange} userProductCategory={this.props.product.category} type="watch" /> 
-      </div>
-    )
-  }
-}
-
+import ProductList from './products/ProductList.js'
 
 class Profile extends Component {
   constructor(props){
@@ -129,7 +96,10 @@ class Profile extends Component {
   }
 
   handleBack = () => {
-    if (this.state.status === "product") {
+    if(this.props.user){
+      this.getDatabase();
+    }
+    if (this.state.view === 'product') {
       this.setState({
         view: 'profile',
         selectedProduct: ''     
@@ -154,7 +124,7 @@ class Profile extends Component {
           <ProductList product={product} handleClick={this.handleClick} user={this.props.user} handleChange={this.handleChange} />
         );
       }); 
-      productCount = {this.state.products.length}
+      productCount = this.state.products.length
     }
     else {
       productList = <p>No products added.</p>
@@ -165,7 +135,7 @@ class Profile extends Component {
 
     if (this.state.ingredients.length > 0) {
       ingredientsTable = <IngredientTable ingredients={this.state.ingredients} user={this.props.user} handleFlag={this.handleFlag} userIngredients={this.state.ingredients} tableClass="profile" />
-      ingredientCount = {this.state.ingredients.length}
+      ingredientCount = this.state.ingredients.length
     }
     else {
       ingredientsTable = <p>No ingredients added.</p>

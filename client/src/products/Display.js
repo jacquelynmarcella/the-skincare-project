@@ -5,82 +5,7 @@ import Loading from '../layout/Loading.js'
 
 import ProductAction from './ProductAction.js'
 import IngredientTable from '../ingredients/IngredientTable.js'
-
-class IngredientSummary extends Component {
-  constructor(props){
-    super(props);
-  }
-
-  render(){
-    var acneCount = 0;
-    var acneIngredients = [];
-    var acneList;
-
-    var irritantCount = 0;
-    var irritatingIngredients = [];
-    var irritationList;
-
-    var flagCount = 0;
-    var flaggedIngredients = [];
-    var flaggedList;
-
-    this.props.ingredients.forEach((ingredient) => {
-      if (parseInt(ingredient.acne) && parseInt(ingredient.acne) > 0) {
-        acneIngredients.push(ingredient);
-        acneCount++;
-      }
-      if (parseInt(ingredient.irritant) && parseInt(ingredient.irritant) > 0) {
-        irritatingIngredients.push(ingredient);
-        irritantCount++;
-      }
-      if (this.props.userIngredients && this.props.userIngredients.length > 0) {
-        let match = this.props.userIngredients.find(o => o.name === ingredient.name);
-        if (match){
-          flaggedIngredients.push(ingredient);
-          flagCount++;
-        }
-      }
-    });
-
-    if (acneIngredients.length > 0) {
-      acneList = acneIngredients.map((ingredient, index) => {
-        return <span className="ingredientBadge">{ingredient.name}</span>
-      })
-    }
-
-    if (irritatingIngredients.length > 0) {
-      irritationList = irritatingIngredients.map((ingredient, index) => {
-        return <span className="ingredientBadge">{ingredient.name}</span>
-      })
-    }
-
-    if (flaggedIngredients.length > 0) {
-      flaggedList = flaggedIngredients.map((ingredient, index) => {
-        return <span className="ingredientBadge">{ingredient.name}</span>
-      })
-    }
-
-    return (
-      <div className="flex">
-        <div className="summary">
-          <h2>Ingredients you've flagged that are in this product</h2>
-          <h1>{flagCount}</h1>
-          <p>{flaggedList}</p>
-        </div>
-        <div className="summary">
-          <h2>Potential acne causing ingredients</h2>
-          <h1>{acneCount}</h1>
-          <p>{acneList}</p>
-        </div>
-        <div className="summary">
-          <h2>Potential irritating ingredients</h2>
-          <h1>{irritantCount}</h1>
-          <p>{irritationList}</p>
-        </div>
-      </div>
-    )
-  }
-}
+import IngredientSummary from '../ingredients/IngredientSummary.js'
 
 class Display extends Component {
   constructor(props){
@@ -162,6 +87,9 @@ class Display extends Component {
     })
   }
 
+  handleBack = (event) => {
+  }
+
   render(){
 
     if(this.state.userProductCategory){
@@ -169,10 +97,10 @@ class Display extends Component {
          <div className="display">
             <h1 className="title">{this.props.data.name}</h1>
             <center>
+            <hr />
               <ProductAction handleClick={this.handleClick} userProductCategory={this.state.userProductCategory} type="favorite" />
               <ProductAction handleClick={this.handleClick} userProductCategory={this.state.userProductCategory} type="fail" /> 
               <ProductAction handleClick={this.handleClick} userProductCategory={this.state.userProductCategory} type="watch" />
-            <hr /> 
             </center>
             <IngredientSummary ingredients={this.props.data.ingredients} user={this.props.user} handleFlag={this.handleFlag} userIngredients={this.props.userIngredients} />
             <IngredientTable ingredients={this.props.data.ingredients} user={this.props.user} userIngredients={this.props.userIngredients} handleFlag={this.handleFlag} tableClass="product" />

@@ -113,7 +113,7 @@ h1.title {
   text-transform: capitalize;
   font-size: 2.5em;
   width: 75%;
-  margin: 30px auto 20px auto;
+  margin: 30px auto;
 }
 
 .summary {
@@ -121,6 +121,7 @@ h1.title {
   display: inline-block;
   flex-grow: 1;
   padding: 20px;
+  margin: 30px auto;
   width: 33%;
   align-self: stretch;
   text-align: center;
@@ -139,7 +140,7 @@ h1.title {
 /* Product display table */
 table {
   width: 100%;
-  margin: 0 auto;
+  margin: 0 auto 30px auto;
   padding: 40px;
   text-align: left;
   border-spacing: 0;
@@ -154,11 +155,16 @@ th {
   padding: 20px;
   background: var(--font-color);
   color: white;
+  border: 2px solid var(--font-color);
 }
 
 tr {
+  background: none;
   transition: all 1s;
-  background: white;
+}
+
+tbody {
+  border: 2px solid white;
 }
 
 td {
@@ -166,7 +172,7 @@ td {
 }
 
 tr:nth-child(even), tr.noflag:nth-child(even) {
-   background: var(--grey-color);
+   background: white;
 }
 
 .product tr.flag, .product tr.flag:nth-child(even) {
@@ -177,10 +183,8 @@ tr:nth-child(even), tr.noflag:nth-child(even) {
 .productListItem {
   box-sizing: border-box; 
   display: inline-block;
-  width: 30%;
-  padding: 20px;
-  margin: 10px;
-  text-align: center;
+  width: 100%;
+  text-align: left;
 }
 
 .productTitle {
@@ -188,11 +192,11 @@ tr:nth-child(even), tr.noflag:nth-child(even) {
   font-size: 1em;
   line-height: 1.4em;
   text-transform: capitalize;
-  width: 100%;
 }
 
 .productTitle:hover {
   cursor: pointer;
+  background: white;
 }
 
 button.defaultCategory {
@@ -204,20 +208,8 @@ button.selectedCategory {
 }
 
 .profile button.defaultCategory, .profile button.selectedCategory {
-    background: white;
-    border-radius: 100px;
-    width: 35px;
-    margin: 20px 2px 30px 2px;
-    height: 35px;
-    font-size: .75em;
-}
-
-.profile button.defaultCategory {
-  color: var(--lavender-color);
-}
-
-.profile button.selectedCategory {
-  color: var(--font-color);
+    margin: 2px;
+    font-size: 1em;
 }
 
 .display button.defaultCategory, .display button.selectedCategory {
@@ -237,7 +229,11 @@ button.defaultCategory:hover, button.selectedCategory:hover {
 
 .flagButton:hover {
   cursor: pointer;
-  color: var(--lavender-color);
+  transform: scale(1.2);
+}
+
+.search {
+  margin-top: -30px;
 }
 
 .searchBar {
@@ -272,7 +268,7 @@ input:focus {
     text-transform: capitalize;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    font-size: 1em;
+    font-size: .85em;
     line-height: 1.4em;
 }
 
@@ -355,7 +351,7 @@ input:focus {
   }
 
   .searchBar {
-    width: 75%;
+    width: 80%;
   }
 
   .searchBar input {
@@ -371,12 +367,13 @@ input:focus {
   }
 
   .summary {
+    margin: 0;
     padding: 10px 5px;
   }
 
   table {
     width: 100%;
-    margin: 0;
+    margin: 30px 0;
     padding: 0;
     font-size: .5em;
   }

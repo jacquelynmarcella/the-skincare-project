@@ -24,13 +24,13 @@ class Search extends Component {
 
   render(){
     return(
-          <div>
-          <h1>Search for a product</h1>
-            <form onSubmit={this.handleSubmit}>
-                <div className="searchBar">
-                  <FA name="search" /> <input name="product" placeholder="e.g. Clinique Mositurizer" onChange={this.handleChange} value={this.state.product} />
-                </div>
-            </form>
+          <div className="search">
+            <h1>Search for a product</h1>
+              <form onSubmit={this.handleSubmit}>
+                  <div className="searchBar">
+                    <FA name="search" /> <input name="product" placeholder="e.g. Clinique Mositurizer" onChange={this.handleChange} value={this.state.product} />
+                  </div>
+              </form>
           </div>
       );
   }
