@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 
 class Flash extends Component {
-  cancelMessage = () => {
-    this.props.cancelFlash();
-  }
 
   render() {
     let flashType = 'error';
@@ -11,9 +8,10 @@ class Flash extends Component {
       flashType = this.props.flashType;
     }
     if(this.props && this.props.flash){
+      setTimeout(this.props.cancelFlash, 1500);
       return (
         <div className={flashType}>
-          {this.props.flash} <button className="x-button" onClick={this.cancelMessage}>X</button>
+          {this.props.flash}
         </div>);
     }
     else {

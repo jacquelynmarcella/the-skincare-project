@@ -53,7 +53,7 @@ header {
   justify-content: center;
   flex-direction: column;
   overflow: hidden;
-  animation: sizein 1s;
+  animation: sizein 750ms ease-in;
 }
 
 header h1 {
@@ -119,21 +119,19 @@ nav {
   text-align: left;
   padding: 20px;
   background: white;
+  font-size: .9em;
   border-bottom: 1px solid var(--grey-color);
+  position: sticky;
 }
 
 nav a {
-  padding: 0 10px;
-  border-bottom: 0;
-}
-
-nav a:hover {
+  margin: 0 10px;
   border-bottom: 0;
 }
 
 nav .logo {
   font-family: var(--header-font);
-  margin-right: 10px;
+  margin-right: 20px;
 }
 
 /* Homepage */
@@ -211,28 +209,25 @@ section.home.stack p, section.home.stack .infographic {
 }
 
 @keyframes sizein {
-  0%  { transform: scale(1); opacity: 0; }
-  50% { transform: scale(1.2); opacity: .5; }
+  0%  { transform: scale(0); opacity: 0; }
   100%  { transform: scale(1); opacity: 1; }
 }
 
 @-webkit-keyframes sizein {
-  0%  { transform: scale(1); opacity: 0; }
-  50% { transform: scale(1.2); opacity: .5; }
+  0%  { transform: scale(0); opacity: 0; }
   100%  { transform: scale(1); opacity: 1; }
 }
 
 @-moz-keyframes sizein {
-  0%  { transform: scale(1); opacity: 0; }
-  50% { transform: scale(1.2); opacity: .5; }
+  0%  { transform: scale(0); opacity: 0; }
   100%  { transform: scale(1); opacity: 1; }
 }
 
 @-o-keyframes sizein {
-  0%  { transform: scale(1); opacity: 0; }
-  50% { transform: scale(1.2); opacity: .5; }
+  0%  { transform: scale(0); opacity: 0; }
   100%  { transform: scale(1); opacity: 1; }
 }
+
 
 /* Product page */
 h1.title {
@@ -441,38 +436,33 @@ button.back:hover {
 }
 
 /* Flash messages */
-.error {
-  background-color: pink;
-  color: red;
-  border: 1px solid red;
-  border-radius: 2px;
-  padding: 10px 30px;
-  width: 75%;
+.success, .error {
+  padding: 20px 30px;
   margin: 10px auto;
+  width: 100%;
+  box-sizing: border-box;
+  position: absolute;
+  top: 48px;
+  left: 0;
+  transition: all 1s;
 }
 
 .success {
-  background-color: #ceffce;
-  color: green;
-  border: 1px solid green;
-  border-radius: 2px;
-  padding: 10px 30px;
-  width: 75%;
-  margin: 10px auto;
+  background: var(--lavender-color);
+}
+
+.error {
+  background-color: var(--pink-color);
 }
 
 .no-flash {
   display: none;
-/*  padding: 10px 30px;
-  width: 75%;
-  margin: 10px auto;*/
 }
 
 .x-button {
-  background-color: red;
-  color: white;
-  border-radius: 2px;
-  float: right;
+  font-size: 1.25em;
+  border-radius: 20px;
+  margin-left: 20px;
 }
 
 @media all and (max-width: 700px){
