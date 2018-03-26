@@ -67,7 +67,7 @@ class Products extends Component {
     console.log("specific product selected: ",data);
     this.setState({
       status: 'loading',
-    })
+    });
     let base = this;
     axios.post('/products/ingredients',{
       data: data 
