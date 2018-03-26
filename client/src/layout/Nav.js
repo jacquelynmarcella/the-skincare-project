@@ -22,7 +22,7 @@ class Nav extends Component {
 
     return(
           <nav className="nav">
-            <Link to="/" className="logo">S/C</Link>
+            <Link to="/" className="logo">SKIN/CARE</Link>
             <Link to="/products">Search</Link>
              {links}
           </nav>

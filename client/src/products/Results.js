@@ -24,7 +24,8 @@ class Results extends Component {
     var length = this.props.results.length;
 
     return(
-          <div>
+          <div className="results">
+            <img src="/img/three-products.png" alt="Product icons" />
             <h1>{this.props.searchTerm}</h1>
             <h3>{length} products found</h3>
             <hr />
