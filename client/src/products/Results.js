@@ -17,18 +17,20 @@ class Results extends Component {
 
   searchProducts = () => {
     let base = this;
-    axios.post('/products/search',{
-      data: this.props.name  
-    }).then(response => {
-      console.log(response);
-      base.setState({
-        results: response.data,
-        status: 'found'
+    if(this.props.name){
+      axios.post('/products/search',{
+        data: base.props.name  
+      }).then(response => {
+        console.log(response);
+        base.setState({
+          results: response.data,
+          status: 'found'
+        })
+        // To do: if length is 0 then we need to go back to search and say no results!
+      }).catch(err => {
+        console.log('Error:', err)
       })
-      // To do: if length is 0 then we need to go back to search and say no results!
-    }).catch(err => {
-      console.log('Error:', err)
-    })
+    }
   }
 
   handleClick = (e) => {
@@ -40,6 +42,10 @@ class Results extends Component {
   }
 
   componentDidMount() {
+    this.searchProducts();
+  }
+
+  componentDidUpdate() {
     this.searchProducts();
   }
 

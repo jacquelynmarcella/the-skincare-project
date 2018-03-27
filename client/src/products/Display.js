@@ -126,7 +126,10 @@ class Display extends Component {
     if(this.state.userProductCategory && this.state.data){
       return(
          <div className="display">
-            <h1 className="title">{this.state.data.name}</h1>
+            <h1 className="title">
+              <img src="/img/mirror.png" alt="Mirror icon" className="title-image" />
+              {this.state.data.name}
+            </h1>
             <center>
             <hr />
             {actionButtons}

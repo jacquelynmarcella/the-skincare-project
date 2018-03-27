@@ -244,8 +244,8 @@ section.home.stack p, section.home.stack .infographic {
 
 /* Product page */
 h1.title {
-  text-transform: capitalize;
-  font-size: 2.5em;
+  text-transform: uppercase;
+  font-size: 2em;
   width: 75%;
   margin: 30px auto;
 }
@@ -259,6 +259,12 @@ h1.title {
   width: 33%;
   align-self: stretch;
   text-align: center;
+}
+
+.summary h2 {
+  text-transform: none;
+  font-family: var(--body-font);
+  font-weight: 400;
 }
 
 .ingredientBadge {
@@ -306,7 +312,7 @@ tr {
 }
 
 tbody {
-  border: 2px solid white;
+  border: 2px solid var(--font-color);
 }
 
 td {
@@ -375,11 +381,12 @@ button.defaultCategory:hover, button.selectedCategory:hover {
 }
 
 .search {
-  margin-top: -30px;
+  margin: 40px auto 80px auto;
+  width: 50%;
+  transition: all 2s;
 }
 
 .searchBar {
-  width: 50%;
   margin: 0 auto;
   text-align: left;
   padding: 20px;
@@ -399,6 +406,10 @@ button.defaultCategory:hover, button.selectedCategory:hover {
 
 input:focus {
   outline: 0;
+}
+
+.results {
+  margin-bottom: 40px;
 }
 
 .productResult {
@@ -530,7 +541,7 @@ button.back:hover {
     font-size: 2em;
   }
 
-  .searchBar {
+  .search {
     width: 80%;
   }
 

@@ -147,7 +147,10 @@ class Profile extends Component {
     else if(this.state.loading === false && this.state.view === "profile" && this.props.user){
       return (
         <div className="profile">
-          <h1>{this.props.user.name}</h1>
+          <h1>
+            <img src="/img/compact.png" alt="Compact icon" className="title-image" />
+            {this.props.user.name}
+          </h1>
           <hr /> 
           <div class="section">
             <h2>{productCount} Products saved</h2>

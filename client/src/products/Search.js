@@ -19,7 +19,7 @@ class Search extends Component {
     event.preventDefault();
     this.setState({
       status: 'submitted',
-      productSummited: this.state.product
+      productSubmitted: this.state.product
     })
   }
 
@@ -39,13 +39,15 @@ class Search extends Component {
     }
 
     return(
-      <div className="search">
-        <form onSubmit={this.handleSubmit}>
-          <h1>Search for a product</h1>
-          <div className="searchBar">
-            <FA name="search" /> <input name="product" placeholder="e.g. Clinique Mositurizer" onChange={this.handleChange} value={this.state.product} />
-          </div>
-        </form>
+      <div>
+        <div className="search">
+          <form onSubmit={this.handleSubmit}>
+            <h1>Search for a product</h1>
+            <div className="searchBar">
+              <FA name="search" /> <input name="product" placeholder="e.g. Clinique Mositurizer" onChange={this.handleChange} value={this.state.product} />
+            </div>
+          </form>
+        </div>
         {results}
       </div>
     );
