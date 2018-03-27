@@ -61,11 +61,11 @@ class Display extends Component {
 
   handleClick = (event) => {
     let selected = {
-      name: this.props.data.name,
-      ingredients: this.props.data.ingredients,
+      name: this.state.data.name,
+      ingredients: this.state.data.ingredients,
       category: event,
       user: this.props.user.id,
-      cosdna: this.props.data.cosdna
+      cosdna: this.state.data.cosdna
     }
     let base = this;
     axios.post('/user/products',{
@@ -129,7 +129,7 @@ class Display extends Component {
             <h1 className="title">{this.state.data.name}</h1>
             <center>
             <hr />
-        {/*    {actionButtons}*/}
+            {actionButtons}
             </center>
             <IngredientSummary ingredients={this.state.data.ingredients} user={this.props.user} handleFlag={this.handleFlag} userIngredients={this.props.userIngredients} />
             <IngredientTable ingredients={this.state.data.ingredients} user={this.props.user} userIngredients={this.props.userIngredients} handleFlag={this.handleFlag} tableClass="product" />

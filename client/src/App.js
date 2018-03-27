@@ -91,6 +91,8 @@ class App extends Component {
                   () => (<Signup user={this.state.user} setFlash={this.setFlash} updateUser={this.getUser} />)} />
               <Route path="/profile" component={
                   () => (<Profile user={this.state.user} setFlash={this.setFlash} />)} />
+              <Route path="/search" component={
+                  () => (<Search user={this.state.user} setFlash={this.setFlash} />)} />
               <Route path="/products" component={
                   () => (<Products user={this.state.user} setFlash={this.setFlash} />)} />
             </div>

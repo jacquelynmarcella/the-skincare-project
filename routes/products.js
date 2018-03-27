@@ -45,12 +45,12 @@ router.post('/search', function(req, res, next){
 
 router.post('/ingredients', function(req, res, next){
   console.log("back end", req.body.data)
-  var productName = "Need to grab name";
   var cosdna = req.body.data;
 
   request('http://www.cosdna.com/eng/' + cosdna + '.html', function(error, response, data){
     var ingredients = [];
     var $ = cheerio.load(data);
+    var productName = $('.ProdTitle').text();
     var resultsTable = $('.iStuffTable tbody tr');
 
     for (var i=2; i<=resultsTable.length; i++) {
@@ -71,7 +71,6 @@ router.post('/ingredients', function(req, res, next){
       }
 
       //TODO: Data cleansing function that returns ingredient array ready to pop in
-
 
       // Need to scrap diff columns dependent on if there is a UV index column
       var column = ($('#pagebase > div.IngContent > div.IngResult > table > tbody > tr:nth-child(1) > td:nth-child(3)').text() === "Acne") ? [3, 4, 5] : [4, 5, 6];

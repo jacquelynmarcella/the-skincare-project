@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import axios from 'axios';
 
-import Search from './Search.js';
-import Results from './Results.js';
 import Display from './Display.js';
 import Loading from '../layout/Loading.js'
 
@@ -14,7 +12,6 @@ class Products extends Component {
       status: 'searching',
       searchTerm: '',
       nameResults: '',
-      productData: '',
       userProducts: '',
       userIngredients: ''
     }
@@ -43,99 +40,17 @@ class Products extends Component {
     }     
   }
 
-  handleSubmit = (data) => {
-    console.log("form submitted: ",data);
-    this.setState({
-      status: 'loading',
-      searchTerm: data
-    })
-    let base = this;
-    axios.post('/products/search',{
-      data: data  
-    }).then(response => {
-      console.log(response);
-      base.setState({
-        nameResults: response.data,
-        status: 'nameresults'
-      })
-      // To do: if length is 0 then we need to go back to search and say no results!
-    }).catch(err => {
-      console.log('Error:', err)
-    })
-  }
-
-  // handleSelect = (data) => {
-  //   console.log("specific product selected: ",data);
-  //   this.setState({
-  //     status: 'loading',
-  //   });
-  //   let base = this;
-  //   axios.post('/products/ingredients',{
-  //     data: data 
-  //   }).then(response => {
-  //     console.log(response);
-  //     base.setState({
-  //       productData: response.data,
-  //       status: 'productdisplay'
-  //     })
-  //   }).catch(err => {
-  //     console.log('Error:', err)
-  //   })
-  // }
-
-  // handleBack = () => {
-  //   if (this.state.status === "nameresults") {
-  //     this.setState({
-  //       status: 'searching',
-  //       searchTerm: '',
-  //       nameResults: '',
-  //     })
-  //   }
-  //   else if (this.state.status === "productdisplay") {
-  //     this.setState({
-  //       status: 'nameresults',
-  //       productData: ''
-  //     })
-  //   }
-  // }
-
   componentDidMount() {
     this.getDatabase();
   }
 
-  render(){
-
-    var display;
-
-    if (this.state.status === 'searching') {
-      display =  <Search handleSubmit={this.handleSubmit} />
-    }
-    else if (this.state.status === 'loading') {
-      display = <Loading />
-    }
-    else if (this.state.status === 'nameresults') {
-      display = (
-        <div> 
-          <Results results={this.state.nameResults} searchTerm={this.state.searchTerm} handleSelect={this.handleSelect} />
-        </div>
-      );
-    }
-    else if (this.state.status === 'productdisplay') {
-      display = ( 
-        <div>
-          Test
-        </div>
-      );     
-    }
+  render(){   
 
     return(
           <div>
-          <h1>Testing</h1>
-        {/*  {display}*/}
-
-           <Route path="/products/:cosdna" render={
-            (props) => (<Display user={this.props.user} userIngredients={this.state.userIngredients} userProducts={this.state.userProducts} {...props} />)
-          } />
+             <Route path="/products/:cosdna" render={
+              (props) => (<Display user={this.props.user} userIngredients={this.state.userIngredients} userProducts={this.state.userProducts} {...props} />)
+            } />
           </div>
     );
   }
