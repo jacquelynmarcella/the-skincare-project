@@ -148,7 +148,7 @@ class Profile extends Component {
       return (
         <div className="profile">
           <h1>
-            <img src="/img/compact.png" alt="Compact icon" className="title-image" />
+            <img src="/img/mirror.png" alt="Mirror icon" className="title-image" />
             {this.props.user.name}
           </h1>
           <hr /> 

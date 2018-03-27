@@ -23,10 +23,10 @@ class ProductList extends Component {
 
       return(
         <div className="productListItem">
-            <Link to={linkUrl}><button className="productTitle">{this.props.product.name}</button></Link>
-            <ProductAction handleClick={this.handleChange} userProductCategory={this.props.product.category} type="favorite" />
-            <ProductAction handleClick={this.handleChange} userProductCategory={this.props.product.category} type="fail" /> 
-            <ProductAction handleClick={this.handleChange} userProductCategory={this.props.product.category} type="watch" /> 
+            <Link to={linkUrl} className="productTitle"><button>{this.props.product.name}</button></Link>
+            <ProductAction handleClick={this.handleChange} userProductCategory={this.props.product.category} type="favorite" size="icon-small" />
+            <ProductAction handleClick={this.handleChange} userProductCategory={this.props.product.category} type="fail" size="icon-small" /> 
+            <ProductAction handleClick={this.handleChange} userProductCategory={this.props.product.category} type="watch" size="icon-small" /> 
         </div>
       )     
 

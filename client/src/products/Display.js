@@ -116,9 +116,9 @@ class Display extends Component {
     if(this.props.user){
       actionButtons = (
         <div>
-          <ProductAction handleClick={this.handleClick} userProductCategory={this.state.userProductCategory} type="favorite" />
-          <ProductAction handleClick={this.handleClick} userProductCategory={this.state.userProductCategory} type="fail" /> 
-          <ProductAction handleClick={this.handleClick} userProductCategory={this.state.userProductCategory} type="watch" />
+          <ProductAction handleClick={this.handleClick} userProductCategory={this.state.userProductCategory} type="favorite" size="icon-large" />
+          <ProductAction handleClick={this.handleClick} userProductCategory={this.state.userProductCategory} type="fail" size="icon-large" /> 
+          <ProductAction handleClick={this.handleClick} userProductCategory={this.state.userProductCategory} type="watch" size="icon-large" />
         </div>
       )
     }
@@ -127,7 +127,7 @@ class Display extends Component {
       return(
          <div className="display">
             <h1 className="title">
-              <img src="/img/mirror.png" alt="Mirror icon" className="title-image" />
+              <img src="/img/product1.png" alt="Product icon" className="title-image" />
               {this.state.data.name}
             </h1>
             <center>

@@ -13,26 +13,16 @@ class ProductAction extends Component {
   render(){
 
     var productClass;
-    var iconType;
-    if (this.props.userProductCategory === this.props.type) {
-      productClass = "selectedCategory" 
-    }
-    else {
-      productClass = "defaultCategory";
-    }
+    let imageUrl = '/img/' + this.props.type + '.png';
 
-    if (this.props.type === "favorite") {
-    	iconType = <FA name="heart" />;
-    }
-    else if (this.props.type === "fail") {
-    	iconType = <FA name="thumbs-down" />;
-    }
-    else if (this.props.type === "watch") {
-    	iconType = <FA name="bookmark" />;
+    if (this.props.userProductCategory === this.props.type) {
+      imageUrl = '/img/' + this.props.type + '-selected.png';
     }
 
     return(
-      <button aria-label={this.props.type} onClick={this.handleClick} className={productClass} alt={this.props.type}>{iconType}</button>
+      <button aria-label={this.props.type} onClick={this.handleClick}>
+        <img src={imageUrl} alt={this.props.type} className={this.props.size} />
+      </button>
     )
   }
 }

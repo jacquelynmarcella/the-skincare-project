@@ -74,6 +74,7 @@ header h2 {
 
 .title-image {
   max-width: 100px;
+  max-height: 200px;
   display: block;
   margin: 20px auto;
 }
@@ -108,6 +109,7 @@ button {
   border: 0;
   padding: 10px;
   color: var(--font-color);
+  transition: all 2s;
 }
 
 button:focus {
@@ -174,18 +176,21 @@ section.home img {
   max-height: 200px;
 }
 
+section.home img.small {
+  max-width: 100px;
+  max-height: 100px;
+}
+
 section.home .infographic {
   flex: 1;
   text-align: center;
 }
 
 section.home .infographic > *:first-child {
-  margin: 30px;
   animation: floating 2s infinite;
 }
 
 section.home .infographic > *:nth-child(2) {
-  margin: 30px;
   animation: floating 2s reverse infinite;
 }
 
@@ -339,20 +344,31 @@ tr:nth-child(even), tr.noflag:nth-child(even) {
   font-family: var(--body-font);
   font-size: 1em;
   line-height: 1.4em;
-  text-transform: capitalize;
+  border-bottom: 0;
 }
 
 .productTitle:hover {
+  border-bottom: 0;
   cursor: pointer;
-  background: white;
 }
 
-button.defaultCategory {
-  color: white;
+.icon-small {
+  width: 30px;
+  transition: all 500ms;
 }
 
-button.selectedCategory {
-  color: var(--font-color);
+.icon-large {
+  transition: all 500ms;
+  width: 75px;
+}
+
+button:active .icon-large, button:active .icon-small {
+  transform: scale(2);
+}
+
+button:hover .icon-large, button:hover .icon-small {
+  transform: scale(1.2);
+  cursor: pointer;
 }
 
 .profile button.defaultCategory, .profile button.selectedCategory {
@@ -364,11 +380,6 @@ button.selectedCategory {
   font-size: 2em;
   width: 60px;
   height: 60px;
-}
-
-button.defaultCategory:hover, button.selectedCategory:hover {
-   cursor: pointer;
-   transform: scale(1.2);
 }
 
 .flagButton {
@@ -426,17 +437,6 @@ input:focus {
 
 .productResult:hover {
   background: white;
-  cursor: pointer;
-}
-
-button.back {
-  background: var(--font-color);
-  color: white;
-  border-radius: 20px;
-  margin: 20px auto;
-}
-
-button.back:hover {
   cursor: pointer;
 }
 
@@ -543,6 +543,7 @@ button.back:hover {
 
   .search {
     width: 80%;
+    margin: 40px auto 60px auto;
   }
 
   .searchBar input {

@@ -29,14 +29,14 @@ class Home extends Component {
         	<section className="home">
         		<p>Add products that have worked for you to your <span className="highlight">favorites</span> and separately keep track of those that have been <span className="highlight">failures</span>.</p>
         		<div className="infographic">
-        			<FA name="heart" />
-        			<FA name="thumbs-down" />
+        			<img src="/img/favorite.png" alt="Favorite icon" className="small" />
+                    <img src="/img/fail.png" alt="Fail icon" className="small" />
         		</div>
         	</section>
         	<hr />
         	<section className="home">
         	    <div className="infographic">
-        			<FA name="bookmark" />
+        			<img src="/img/watch.png" alt="Bookmark icon" />
         		</div>
         		<p>Just starting to try a new product, or simply want to save it to your list? Add it to your <span className="highlight">bookmarks</span> and you can move it to your favorites or failures later.</p>
         	</section>
