@@ -6,7 +6,7 @@ class Home extends Component {
     return (
         <div>
         	<header>
-        		<img src="/img/three-products.png" alt="Products icon" />
+        		<img src="/img/three-products.png" alt="Products icon" className="title-image" />
         		<h1>SKIN/CARE</h1>
         		<h2>Smarter product and ingredient tracking for sensitive skin</h2>
         	</header>

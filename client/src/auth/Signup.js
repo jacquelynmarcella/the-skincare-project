@@ -44,27 +44,39 @@ class Signup extends Component {
     }
     else {
       form = (<form onSubmit={this.handleSubmit}>
-                <div>
-                  <input name="Name"
-                       placeholder="What is your first name?"
-                       value={this.state.name}
-                       onChange={this.handleNameChange}
-                  />
+                <h1>
+                  <img src="/img/three-products.png" alt="Products icon" className="title-image" /> 
+                  Signup
+                </h1>
+                <div className="flex-form">
+                  <label for="name">
+                    <p>Name</p>
+                    <input name="Name"
+                      id="name"
+                      placeholder="Name"
+                      value={this.state.name}
+                      onChange={this.handleNameChange}
+                    />
+                  </label>
+                  <label for="email">
+                    <p>Email</p>
+                    <input name="Email"
+                      id="email"
+                      placeholder="Email"
+                      value={this.state.email}
+                      onChange={this.handleEmailChange} />
+                  </label>
+                  <label for="password">
+                    <p>Password</p>
+                    <input name="Password"
+                      id="password"
+                      placeholder="Password"
+                      type="password"
+                      value={this.state.password}
+                      onChange={this.handlePasswordChange} />
+                  </label>
+                  <input type="submit" value="Sign Up" />
                 </div>
-                <div>
-                  <input name="Email"
-                       placeholder="What is your email?"
-                       value={this.state.email}
-                       onChange={this.handleEmailChange} />
-               </div>
-               <div>
-                  <input name="Password"
-                     placeholder="Choose a password"
-                     type="password"
-                     value={this.state.password}
-                     onChange={this.handlePasswordChange} />
-                 </div>
-                 <input type="submit" value="Sign up!" className="btn-primary" />
               </form>);
     }
     return (

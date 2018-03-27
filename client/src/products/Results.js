@@ -25,7 +25,7 @@ class Results extends Component {
 
     return(
           <div className="results">
-            <img src="/img/three-products.png" alt="Product icons" />
+            <img src="/img/three-products.png" alt="Product icons" className="title-image" />
             <h1>{this.props.searchTerm}</h1>
             <h3>{length} products found</h3>
             <hr />
