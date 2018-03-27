@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FA from 'react-fontawesome';
+import { Link } from 'react-router-dom';
 
 class Home extends Component {
   render(){
@@ -42,8 +43,8 @@ class Home extends Component {
         	<hr />
         	<section className="home stack">
         		<p>Ready to get started?</p>
-        		<p>Start searching</p>
-        		<p>Log in or signup</p>
+        		<p><Link to="/signup" className="CTA">Sign Up</Link>
+        		<Link to="/products" className="CTA">Search Products</Link></p>
         	</section>
         </div>
       );

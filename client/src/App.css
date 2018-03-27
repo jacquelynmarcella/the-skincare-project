@@ -88,6 +88,21 @@ a:hover {
     border-bottom: 2px solid var(--lavender-color);
 }
 
+a.CTA {
+  background: white;
+  border-bottom: 0;
+  padding: 20px;
+  margin: 10px;
+  font-weight: 700;
+  box-shadow: 4px 4px var(--lavender-color);
+  display: inline-block;
+}
+
+a.CTA:hover {
+  box-shadow: 0 0;
+  transform: translateX(4px) translateY(4px);
+}
+
 button {
   background: none;
   border: 0;
@@ -181,8 +196,6 @@ section.home.stack p, section.home.stack .infographic {
 
 .highlight {
   font-weight: 700;
-  font-size: 1.10em;
-  margin: 0 2px;
 }
 
 @keyframes floating {
@@ -368,7 +381,6 @@ button.defaultCategory:hover, button.selectedCategory:hover {
 
 .searchBar {
   width: 50%;
-  border: 2px solid var(--grey-color);
   margin: 0 auto;
   text-align: left;
   padding: 20px;
@@ -440,6 +452,7 @@ button.back:hover {
 .flex-form label input {
   flex: 2;
   border: 0;
+  border-radius: 0;
   padding: 0 10px;
   font-size: 1em;
   color: var(--font-color);
@@ -452,6 +465,7 @@ button.back:hover {
   background: var(--font-color);
   padding: 10px 20px;
   border: 0;
+  border-radius: 0;
   font-size: 1em;
   color: white;
   font-family: var(--body-font);

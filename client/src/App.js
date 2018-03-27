@@ -12,6 +12,7 @@ import Nav from './layout/Nav.js';
 // Page routes
 import Home from './Home.js';
 import Products from './products/Products.js';
+import Search from './products/Search.js';
 
 // Auth routes
 import Login from './auth/Login.js';
@@ -90,6 +91,8 @@ class App extends Component {
                   () => (<Signup user={this.state.user} setFlash={this.setFlash} updateUser={this.getUser} />)} />
               <Route path="/profile" component={
                   () => (<Profile user={this.state.user} setFlash={this.setFlash} />)} />
+              <Route path="/search" component={
+                  () => (<Search user={this.state.user} setFlash={this.setFlash} />)} />
               <Route path="/products" component={
                   () => (<Products user={this.state.user} setFlash={this.setFlash} />)} />
             </div>
