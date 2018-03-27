@@ -17,10 +17,9 @@ class Search extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    let product = '/search/' + this.state.product;
     this.setState({
       status: 'submitted',
-      productUrl: product
+      productSummited: this.state.product
     })
   }
 
@@ -32,30 +31,24 @@ class Search extends Component {
   }
 
   render(){
-    var display;
+    var results;
 
-    if (!this.state.productUrl) {
-      display = (
+    if(this.state.status === 'submitted') {
+      // Doing separately so it doesn't auto update if they revise submission
+      results = <Results name={this.state.productSubmitted} />
+    }
+
+    return(
+      <div className="search">
         <form onSubmit={this.handleSubmit}>
           <h1>Search for a product</h1>
           <div className="searchBar">
             <FA name="search" /> <input name="product" placeholder="e.g. Clinique Mositurizer" onChange={this.handleChange} value={this.state.product} />
           </div>
         </form>
-      )
-    }
-    else {
-      display = <Redirect to={this.state.productUrl} />
-    }
-
-    return(
-          <div className="search">
-            {display}
-            <Route path="/search/:product" render={
-              (props) => (<Results {...props} />)
-            } />
-          </div>
-      );
+        {results}
+      </div>
+    );
   }
 }
 

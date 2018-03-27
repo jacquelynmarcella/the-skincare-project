@@ -18,7 +18,7 @@ class Results extends Component {
   searchProducts = () => {
     let base = this;
     axios.post('/products/search',{
-      data: this.props.match.params.product  
+      data: this.props.name  
     }).then(response => {
       console.log(response);
       base.setState({
@@ -57,7 +57,7 @@ class Results extends Component {
       return(
         <div className="results">
           <img src="/img/three-products.png" alt="Product icons" className="title-image" />
-          <h1>{this.props.match.params.product}</h1>
+          <h1>{this.props.name}</h1>
           <h3>{length} products found</h3>
           <hr />
             {display}
