@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 
 const Loading = () => {
-  return <div>Loading...</div>
+  return (
+  	  <header>
+	  	  <h2>
+		  	  <img src="/img/connections.png" className="title-image" />
+		  	  LOADING
+	  	  </h2>
+  	  </header>
+  )
+
 }
 
 export default Loading;

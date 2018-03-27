@@ -126,16 +126,16 @@ class Display extends Component {
     if(this.state.userProductCategory && this.state.data){
       return(
          <div className="display">
+          <header>
             <h1 className="title">
               <img src="/img/product1.png" alt="Product icon" className="title-image" />
               {this.state.data.name}
             </h1>
-            <center>
             <hr />
             {actionButtons}
-            </center>
-            <IngredientSummary ingredients={this.state.data.ingredients} user={this.props.user} handleFlag={this.handleFlag} userIngredients={this.props.userIngredients} />
-            <IngredientTable ingredients={this.state.data.ingredients} user={this.props.user} userIngredients={this.props.userIngredients} handleFlag={this.handleFlag} tableClass="product" />
+          </header>
+          <IngredientSummary ingredients={this.state.data.ingredients} user={this.props.user} handleFlag={this.handleFlag} userIngredients={this.props.userIngredients} />
+          <IngredientTable ingredients={this.state.data.ingredients} user={this.props.user} userIngredients={this.props.userIngredients} handleFlag={this.handleFlag} tableClass="product" />
         </div>
       )
     }

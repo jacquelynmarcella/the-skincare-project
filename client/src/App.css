@@ -46,17 +46,26 @@ h1, h2, h3 {
   text-transform: uppercase;
 }
 
+h4 {
+  text-align: center;
+  font-weight: 400;
+}
+
 header {
-  min-height: 80vh;
+  min-height: 60vh;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+}
+
+header.home {
   overflow: hidden;
+  min-height: 80vh;
   animation: sizein 750ms ease-in;
 }
 
-header h1 {
+header.home h1 {
   font-size: 4em;
   letter-spacing: 7px;
   display: inline-block;
@@ -64,7 +73,7 @@ header h1 {
   margin: 0 auto;
 }
 
-header h2 {
+header.home h2 {
   font-family: var(--body-font);
   text-transform: none;
   font-weight: 400;
@@ -177,8 +186,8 @@ section.home img {
 }
 
 section.home img.small {
-  max-width: 100px;
-  max-height: 100px;
+  max-width: 150px;
+  max-height: 150px;
 }
 
 section.home .infographic {
@@ -204,25 +213,25 @@ section.home.stack p, section.home.stack .infographic {
 
 @keyframes floating {
   0%  { transform: translate(0, 0); }
-  50% { transform: translate(0, .10em); }
+  50% { transform: translate(0, .20em); }
   100%  { transform: translate(0, 0em); }
 }
 
 @-webkit-keyframes floating {
   0%  { transform: translate(0, 0); }
-  50% { transform: translate(0, .10em); }
+  50% { transform: translate(0, .20em); }
   100%  { transform: translate(0, 0em); }
 }
 
 @-moz-keyframes floating {
   0%  { transform: translate(0, 0); }
-  50% { transform: translate(0, .10em); }
+  50% { transform: translate(0, .20em); }
   100%  { transform: translate(0, 0em); }
 }
 
 @-o-keyframes floating {
   0%  { transform: translate(0, 0); }
-  50% { transform: translate(0, .10em); }
+  50% { transform: translate(0, .20em); }
   100%  { transform: translate(0, 0em); }
 }
 
@@ -293,7 +302,7 @@ h1.title {
 /* Product display table */
 table {
   width: 100%;
-  margin: 0 auto 30px auto;
+  margin: 30px auto;
   padding: 40px;
   text-align: left;
   border-spacing: 0;
@@ -338,18 +347,28 @@ tr:nth-child(even), tr.noflag:nth-child(even) {
   display: inline-block;
   width: 100%;
   text-align: center;
+  margin-top: 30px;
 }
 
 .productTitle {
+  border-bottom: 0;
+  display: block;
+}
+
+a.productTitle button {
   font-family: var(--body-font);
   font-size: 1em;
-  line-height: 1.4em;
+  transition: all 1s;
+  padding: 5px;
+}
+
+a.productTitle:hover {
   border-bottom: 0;
 }
 
-.productTitle:hover {
-  border-bottom: 0;
+a.productTitle button:hover {
   cursor: pointer;
+  background: white;
 }
 
 .icon-small {
@@ -536,13 +555,13 @@ input:focus {
     font-size: 2.5em;
   }
 
-  h1.title {
+  header h1.title {
     width: 90%;
     font-size: 2em;
   }
 
   .search {
-    width: 80%;
+    width: 100%;
     margin: 40px auto 60px auto;
   }
 
@@ -559,7 +578,7 @@ input:focus {
   }
 
   .summary {
-    margin: 0;
+    margin: 30px 0;
     padding: 10px 5px;
   }
 
@@ -585,6 +604,10 @@ input:focus {
 
   section.home p {
     order: 1;
+  }
+
+  a.CTA {
+    padding: 10px;
   }
 
   .flex-form label {

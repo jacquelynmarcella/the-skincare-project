@@ -6,7 +6,7 @@ class Home extends Component {
   render(){
     return (
         <div>
-        	<header>
+        	<header className="home">
         		<img src="/img/three-products.png" alt="Products icon" className="title-image" />
         		<h1>SKIN/CARE</h1>
         		<h2>Smarter product and ingredient tracking for sensitive skin</h2>

@@ -127,7 +127,7 @@ class Profile extends Component {
       productCount = this.state.products.length
     }
     else {
-      productList = <p>No products added.</p>
+      productList = <center><p>No products added.</p></center>
     }
 
     var ingredientsTable;
@@ -147,19 +147,34 @@ class Profile extends Component {
     else if(this.state.loading === false && this.state.view === "profile" && this.props.user){
       return (
         <div className="profile">
-          <h1>
-            <img src="/img/mirror.png" alt="Mirror icon" className="title-image" />
-            {this.props.user.name}
-          </h1>
-          <hr /> 
-          <div class="section">
-            <h2>{productCount} Products saved</h2>
-            <div className="flex">
+          <header>
+            <h1>
+              <img src="/img/mirror.png" alt="Mirror icon" className="title-image" />
+              {this.props.user.name}
+            </h1>
+            <hr /> 
+            <h4>{productCount} products saved | {ingredientCount} ingredients flagged</h4>
+          </header>
+
+          <div className="flex section">
+            <div className="summary">
+              <img src="/img/favorite.png" aria-label="Favorite Products" alt="Favorite icon" className="icon-large" />
+              {productList}
+            </div>
+            <div className="summary">
+              <img src="/img/fail.png" aria-label="Failed Products" alt="Fail icon" className="icon-large" />
+              {productList}
+            </div>
+            <div className="summary">
+              <img src="/img/watch.png" aria-label="Bookmaked Products" alt="Bookmark icon" className="icon-large" />
               {productList}
             </div>
           </div>
-          <h2>{ingredientCount} Ingredients flagged</h2>
-          {ingredientsTable}
+          <hr />
+          <div className="section">
+            <h2>Flagged Ingredients</h2>
+            {ingredientsTable}
+          </div>
         </div>
       );
     }
