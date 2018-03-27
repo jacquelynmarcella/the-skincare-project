@@ -17,11 +17,15 @@ class Results extends Component {
   }
 
   render(){
-    var display = this.props.results.map((product, index) => {
-      return <button className="productResult" onClick={this.handleClick} id={product.cosdna} name={product.name}>{product.name}</button>
-    });
-
+    var display;
     var length = this.props.results.length;
+
+    if(length > 0) {
+      display = this.props.results.map((product, index) => (
+        <Link to={`/products/${product.cosdna}`} className="productResult">{product.name}
+          </Link>)      
+      );
+    }
 
     return(
           <div className="results">

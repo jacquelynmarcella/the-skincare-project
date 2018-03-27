@@ -95,17 +95,17 @@ class Profile extends Component {
     })
   }
 
-  handleBack = () => {
-    if(this.props.user){
-      this.getDatabase();
-    }
-    if (this.state.view === 'product') {
-      this.setState({
-        view: 'profile',
-        selectedProduct: ''     
-      })
-    }
-  }
+  // handleBack = () => {
+  //   if(this.props.user){
+  //     this.getDatabase();
+  //   }
+  //   if (this.state.view === 'product') {
+  //     this.setState({
+  //       view: 'profile',
+  //       selectedProduct: ''     
+  //     })
+  //   }
+  // }
 
   componentDidMount(){
     if(this.props.user){
@@ -163,7 +163,6 @@ class Profile extends Component {
     else if (this.state.loading === false && this.state.view === "product" && this.props.user) {
       return (
         <div>
-          <button onClick={this.handleBack} className="back">Back</button>
           <Display data={this.state.selectedProduct} user={this.props.user} userIngredients={this.state.ingredients} userProducts={this.state.products} tableClass="product" />
         </div>
       )

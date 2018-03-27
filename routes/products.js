@@ -45,8 +45,8 @@ router.post('/search', function(req, res, next){
 
 router.post('/ingredients', function(req, res, next){
   console.log("back end", req.body.data)
-  var productName = req.body.data.name;
-  var cosdna = req.body.data.cosdna;
+  var productName = "Need to grab name";
+  var cosdna = req.body.data;
 
   request('http://www.cosdna.com/eng/' + cosdna + '.html', function(error, response, data){
     var ingredients = [];

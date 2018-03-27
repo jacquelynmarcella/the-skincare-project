@@ -177,7 +177,6 @@ section.home img {
 section.home .infographic {
   flex: 1;
   text-align: center;
-  font-size: 5em;
 }
 
 section.home .infographic > *:first-child {
