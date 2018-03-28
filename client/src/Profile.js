@@ -116,24 +116,25 @@ class Profile extends Component {
               {this.props.user.name}
             </h1>
             <hr /> 
-            <h4>{productCount} products saved | {ingredientCount} ingredients flagged</h4>
+            <h4>{productCount} products saved</h4>
+            <h4>{ingredientCount} ingredients flagged</h4>
           </header>
 
           <div className="flex section">
 
             <div className="summary">
               <img src="/img/favorite.png" aria-label="Favorite Products" alt="Favorite icon" className="icon-large" />
-              <ProductList products={this.state.products} category="favorite" handleClick={this.handleClick} user={this.props.user} handleChange={this.handleChange} />
+              <ProductList products={this.state.products} category="favorite" user={this.props.user} handleChange={this.handleChange} />
             </div>
 
             <div className="summary">
               <img src="/img/fail.png" aria-label="Failed Products" alt="Fail icon" className="icon-large" />
-              <ProductList products={this.state.products} category="fail" handleClick={this.handleClick} user={this.props.user} handleChange={this.handleChange} />
+              <ProductList products={this.state.products} category="fail" user={this.props.user} handleChange={this.handleChange} />
             </div>
 
             <div className="summary">
               <img src="/img/watch.png" aria-label="Bookmaked Products" alt="Bookmark icon" className="icon-large" />
-              <ProductList products={this.state.products} category="watch" handleClick={this.handleClick} user={this.props.user} handleChange={this.handleChange} />
+              <ProductList products={this.state.products} category="watch" user={this.props.user} handleChange={this.handleChange} />
             </div>
 
           </div>

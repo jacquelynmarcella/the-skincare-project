@@ -41,18 +41,22 @@ class ProductList extends Component {
     var productList;
 
     if (this.props.products.length > 0){
-      productList = this.props.products.map((product, index) => {
-
-        if(product.category === this.props.category) {
-          return (
-            <ProductListItem product={product} handleClick={this.props.handleClick} user={this.props.user} handleChange={this.props.handleChange} />
-          );
-        }
-    
-      }); 
+      let match = this.props.products.find(o => o.category === this.props.category);
+      if (match) {  
+        productList = this.props.products.map((product, index) => {
+          if(product.category === this.props.category) {
+            return (
+              <ProductListItem product={product} user={this.props.user} handleChange={this.props.handleChange} />
+            );
+          }  
+        }); 
+      }  
+      else {  
+        productList = (<div className="productListItem">No products added</div>);   
+      }
     }
     else {
-      productList = <center><p>No products added.</p></center>
+      productList = (<div className="productListItem">No products added</div>);
     }
 
     return(

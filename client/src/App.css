@@ -555,9 +555,13 @@ input:focus {
     font-size: 2.5em;
   }
 
-  header h1.title {
+  header h1.title, h1.title {
     width: 90%;
     font-size: 2em;
+  }
+
+  .title-image {
+    max-height: 100px;
   }
 
   .search {

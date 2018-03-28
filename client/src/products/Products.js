@@ -24,16 +24,16 @@ class Products extends Component {
         method: 'get',
         url: '/user/profile',
         params: {
-          user: this.props.user.id
+          user: base.props.user.id
         }
       }).then((result) => {
         console.log(result);
-        this.setState({
+        base.setState({
           userProducts: result.data[0],
           userIngredients: result.data[1]
         })
-        console.log("state-ingredients",this.state.ingredients);
-        console.log("state-products",this.state.products);
+        console.log("user state-ingredients",this.state.ingredients);
+        console.log("user state-products",this.state.products);
       }).catch((error) => {
         console.log("An error occured", error.response.data);
       });

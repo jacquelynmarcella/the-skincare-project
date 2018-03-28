@@ -47,6 +47,7 @@ class Display extends Component {
       base.setState({
         data: response.data
       })
+      this.checkMatch();
     }).catch(err => {
       console.log('Error:', err)
     })
@@ -54,7 +55,6 @@ class Display extends Component {
 
   componentDidMount() {
     this.findProduct();
-    this.checkMatch();
     console.log(this.props.match.params.cosdna,"cosdna from params");
     console.log(this.state);
   }
