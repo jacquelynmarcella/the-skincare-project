@@ -9,7 +9,7 @@ class Home extends Component {
         	<header className="home">
         		<img src="/img/three-products.png" alt="Products icon" className="title-image" />
         		<h1>SKIN/CARE</h1>
-        		<h2>Smarter product and ingredient tracking for sensitive skin</h2>
+        		<h2>Personalized product and ingredient tracking for sensitive skin</h2>
         	</header>
         	<hr />
         	<section className="home">

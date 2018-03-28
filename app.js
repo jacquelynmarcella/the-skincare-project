@@ -33,3 +33,5 @@ app.get('*', function(req, res, next) {
 });
 
 module.exports = app;
+
+let server = app.listen(process.env.PORT || 4000);

@@ -115,8 +115,8 @@ class Profile extends Component {
               <img src="/img/mirror.png" alt="Mirror icon" className="title-image" />
               {this.props.user.name}
             </h1>
-            <hr /> 
             <h4>{productCount} products saved | {ingredientCount} ingredients flagged</h4>
+            <hr /> 
           </header>
 
           <div className="flex section">
