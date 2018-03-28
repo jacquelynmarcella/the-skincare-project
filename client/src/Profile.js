@@ -122,11 +122,9 @@ class Profile extends Component {
               {this.props.user.name}
             </h1>
             <h4>{productCount} products saved ◇ {ingredientCount} ingredients flagged</h4>
-            <hr /> 
           </header>
-
+          <hr /> 
           <div className="flex section">
-
             <div className="summary">
               <img src={favorite} aria-label="Favorite Products" alt="Favorite icon" className="icon-large" />
               <ProductList products={this.state.products} category="favorite" user={this.props.user} handleChange={this.handleChange} />
@@ -141,10 +139,8 @@ class Profile extends Component {
               <img src={watch} aria-label="Bookmaked Products" alt="Bookmark icon" className="icon-large" />
               <ProductList products={this.state.products} category="watch" user={this.props.user} handleChange={this.handleChange} />
             </div>
-
-          <hr />
           </div>
-
+          <hr />
           <div className="section">
             <h2>Flagged Ingredients</h2>
             {ingredientsTable}

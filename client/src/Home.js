@@ -52,7 +52,7 @@ class Home extends Component {
         	<section className="home stack">
         		<p>Ready to get started?</p>
         		<p><Link to="/signup" className="CTA">Sign Up</Link>
-        		<Link to="/products" className="CTA">Search Products</Link></p>
+        		<Link to="/search" className="CTA">Search Products</Link></p>
         	</section>
         </div>
       );

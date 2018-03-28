@@ -16,14 +16,28 @@ router.get('/profile', function(req, res){
 	console.log(req.query.user)
 	Product.find({ user: req.query.user }, function(err, product){	
 		if (product) {
-			userInfo.push(product)
+            let sortedProduct = product.sort(function(a, b){ 
+                var x = a.name.trim().toLowerCase();
+                var y = b.name.trim().toLowerCase();
+                if (x < y) {return -1;} 
+                if (x > y) {return 1;}
+                return 0; 
+            })
+			userInfo.push(sortedProduct)
 		}
 		else {
 			userInfo.push(null);
 		}	
 		Ingredient.find({ user: req.query.user }, function(err, ingredient){
 			if (ingredient){
-				userInfo.push(ingredient);
+                let sortedIngredient = ingredient.sort(function(a, b){ 
+                    var x = a.name.trim().toLowerCase();
+                    var y = b.name.trim().toLowerCase();
+                    if (x < y) {return -1;} 
+                    if (x > y) {return 1;}
+                    return 0; 
+                })
+				userInfo.push(sortedIngredient);
 				res.send(userInfo);
 			}				
 			else {

@@ -33,9 +33,12 @@ router.post('/search', function(req, res, next){
     if(data){
       var $ = cheerio.load(data);
       var products = $('.ProdName a').map(function(index, element){
-        return {
-          name: $(element).text().toLowerCase(),
-          cosdna: $(element).attr('href').replace(/\.[^/.]+$/, ""),
+        let name = $(element).text().trim();
+        if(name !== "(1)"){
+          return {
+            name: name,
+            cosdna: $(element).attr('href').replace(/\.[^/.]+$/, ""),
+          }
         }
       }).get();   
       console.log(products);

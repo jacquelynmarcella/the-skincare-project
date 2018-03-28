@@ -4,14 +4,8 @@ import connections from '../img/connections.png';
 
 const Loading = () => {
   return (
-  	  <header>
-	  	  <h2>
-		  	  <img src={connections} className="title-image" />
-		  	  LOADING
-	  	  </h2>
-  	  </header>
+	<h2><img src={connections} className="title-image" />Loading</h2>
   )
-
 }
 
 export default Loading;
