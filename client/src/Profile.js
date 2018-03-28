@@ -5,6 +5,12 @@ import Display from './products/Display.js'
 import Loading from './layout/Loading.js'
 import ProductList from './products/ProductList.js'
 
+//Images
+import mirror from './img/mirror.png';
+import favorite from './img/favorite.png';
+import fail from './img/fail.png';
+import watch from './img/watch.png';
+
 class Profile extends Component {
   constructor(props){
     super(props);
@@ -101,7 +107,7 @@ class Profile extends Component {
       ingredientCount = this.state.ingredients.length
     }
     else {
-      ingredientsTable = <p>No ingredients added.</p>
+      ingredientsTable = <center><p>No ingredients added.</p></center>
     }
 
     if(this.state.loading === true && this.props.user) {
@@ -112,27 +118,27 @@ class Profile extends Component {
         <div className="profile">
           <header>
             <h1>
-              <img src="/img/mirror.png" alt="Mirror icon" className="title-image" />
+              <img src={mirror} alt="Mirror icon" className="title-image" />
               {this.props.user.name}
             </h1>
-            <h4>{productCount} products saved | {ingredientCount} ingredients flagged</h4>
+            <h4>{productCount} products saved ◇ {ingredientCount} ingredients flagged</h4>
             <hr /> 
           </header>
 
           <div className="flex section">
 
             <div className="summary">
-              <img src="/img/favorite.png" aria-label="Favorite Products" alt="Favorite icon" className="icon-large" />
+              <img src={favorite} aria-label="Favorite Products" alt="Favorite icon" className="icon-large" />
               <ProductList products={this.state.products} category="favorite" user={this.props.user} handleChange={this.handleChange} />
             </div>
 
             <div className="summary">
-              <img src="/img/fail.png" aria-label="Failed Products" alt="Fail icon" className="icon-large" />
+              <img src={fail} aria-label="Failed Products" alt="Fail icon" className="icon-large" />
               <ProductList products={this.state.products} category="fail" user={this.props.user} handleChange={this.handleChange} />
             </div>
 
             <div className="summary">
-              <img src="/img/watch.png" aria-label="Bookmaked Products" alt="Bookmark icon" className="icon-large" />
+              <img src={watch} aria-label="Bookmaked Products" alt="Bookmark icon" className="icon-large" />
               <ProductList products={this.state.products} category="watch" user={this.props.user} handleChange={this.handleChange} />
             </div>
 

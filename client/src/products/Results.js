@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 import Loading from '../layout/Loading.js';
+import threeproducts from '../img/three-products.png';
 
 class Results extends Component {
   constructor(props){
@@ -17,6 +18,10 @@ class Results extends Component {
 
   searchProducts = () => {
     let base = this;
+    this.setState({
+      results: '',
+      status: 'loading'
+    })
     if(this.props.name){
       axios.post('/products/search',{
         data: base.props.name  
@@ -45,14 +50,6 @@ class Results extends Component {
     this.searchProducts();
   }
 
-  componentDidUpdate() {
-    this.setState({
-      status: 'loading',
-      results: ''
-    })
-    this.searchProducts();
-  }
-
   render(){
     var display;
     var length = this.state.results.length;
@@ -66,7 +63,7 @@ class Results extends Component {
     if(this.state.status === 'found') {
       return(
         <div className="results">
-          <img src="/img/three-products.png" alt="Product icons" className="title-image" />
+          <img src={threeproducts} alt="Product icons" className="title-image" />
           <h1>{this.props.name}</h1>
           <h3>{length} products found</h3>
           <hr />

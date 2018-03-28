@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
+import threeproducts from '../img/three-products.png';
+
 class Signup extends Component {
   constructor(props) {
     super(props)
@@ -45,7 +47,7 @@ class Signup extends Component {
     else {
       form = (<form onSubmit={this.handleSubmit}>
                 <h1>
-                  <img src="/img/three-products.png" alt="Products icon" className="title-image" /> 
+                  <img src={threeproducts} alt="Products icon" className="title-image" /> 
                   Signup
                 </h1>
                 <div className="flex-form">

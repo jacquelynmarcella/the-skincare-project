@@ -7,6 +7,8 @@ import ProductAction from './ProductAction.js'
 import IngredientTable from '../ingredients/IngredientTable.js'
 import IngredientSummary from '../ingredients/IngredientSummary.js'
 
+import product1 from '../img/product1.png';
+
 class Display extends Component {
   constructor(props){
     super(props);

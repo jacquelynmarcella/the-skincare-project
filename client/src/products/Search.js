@@ -17,9 +17,11 @@ class Search extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+    let currentProduct = this.state.product;
     this.setState({
       status: 'submitted',
-      productSubmitted: this.state.product
+      productSubmitted: currentProduct,
+      product: ''
     })
   }
 
