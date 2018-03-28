@@ -12,8 +12,6 @@ class Profile extends Component {
       products: '',
       ingredients: '',
       loading: true,
-      view: 'profile',
-      selectedProduct: ''
     }
   }
 
@@ -37,15 +35,6 @@ class Profile extends Component {
       console.log("An error occured", error.response.data);
     });
   }
-
-  handleClick = (event) => {
-    console.log(event);
-    this.setState({
-      view: 'product',
-      selectedProduct: event
-    })
-  }
-
 
   handleChange = (event) => {
     let base = this;
@@ -95,18 +84,6 @@ class Profile extends Component {
     })
   }
 
-  // handleBack = () => {
-  //   if(this.props.user){
-  //     this.getDatabase();
-  //   }
-  //   if (this.state.view === 'product') {
-  //     this.setState({
-  //       view: 'profile',
-  //       selectedProduct: ''     
-  //     })
-  //   }
-  // }
-
   componentDidMount(){
     if(this.props.user){
       this.getDatabase();
@@ -115,21 +92,7 @@ class Profile extends Component {
 
   render(){
 
-    var productList;
-    var productCount = 0;
-
-    if (this.state.products.length > 0){
-      productList = this.state.products.map((product, index) => {
-        return (
-          <ProductList product={product} handleClick={this.handleClick} user={this.props.user} handleChange={this.handleChange} />
-        );
-      }); 
-      productCount = this.state.products.length
-    }
-    else {
-      productList = <center><p>No products added.</p></center>
-    }
-
+    var productCount = this.state.products.length;
     var ingredientsTable;
     var ingredientCount = 0;
 
@@ -144,7 +107,7 @@ class Profile extends Component {
     if(this.state.loading === true && this.props.user) {
       return ( <Loading /> )
     }
-    else if(this.state.loading === false && this.state.view === "profile" && this.props.user){
+    else if(this.state.loading === false && this.props.user){
       return (
         <div className="profile">
           <header>
@@ -157,18 +120,22 @@ class Profile extends Component {
           </header>
 
           <div className="flex section">
+
             <div className="summary">
               <img src="/img/favorite.png" aria-label="Favorite Products" alt="Favorite icon" className="icon-large" />
-              {productList}
+              <ProductList products={this.state.products} category="favorite" handleClick={this.handleClick} user={this.props.user} handleChange={this.handleChange} />
             </div>
+
             <div className="summary">
               <img src="/img/fail.png" aria-label="Failed Products" alt="Fail icon" className="icon-large" />
-              {productList}
+              <ProductList products={this.state.products} category="fail" handleClick={this.handleClick} user={this.props.user} handleChange={this.handleChange} />
             </div>
+
             <div className="summary">
               <img src="/img/watch.png" aria-label="Bookmaked Products" alt="Bookmark icon" className="icon-large" />
-              {productList}
+              <ProductList products={this.state.products} category="watch" handleClick={this.handleClick} user={this.props.user} handleChange={this.handleChange} />
             </div>
+
           </div>
           <hr />
           <div className="section">
@@ -178,15 +145,8 @@ class Profile extends Component {
         </div>
       );
     }
-    else if (this.state.loading === false && this.state.view === "product" && this.props.user) {
-      return (
-        <div>
-          <Display data={this.state.selectedProduct} user={this.props.user} userIngredients={this.state.ingredients} userProducts={this.state.products} tableClass="product" />
-        </div>
-      )
-    }
     else {
-      return (<p>Please log in.</p>);
+      return (<h2>Please log in to view this page.</h2>);
     }
   }
 }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ProductAction from './ProductAction.js'
 import { Link } from 'react-router-dom';
 
-class ProductList extends Component {
+class ProductListItem extends Component {
   constructor(props){
     super(props);
   }
@@ -29,7 +29,37 @@ class ProductList extends Component {
             <ProductAction handleClick={this.handleChange} userProductCategory={this.props.product.category} type="watch" size="icon-small" /> 
         </div>
       )     
+  }
+}
 
+
+
+
+class ProductList extends Component {
+  render(){
+
+    var productList;
+
+    if (this.props.products.length > 0){
+      productList = this.props.products.map((product, index) => {
+
+        if(product.category === this.props.category) {
+          return (
+            <ProductListItem product={product} handleClick={this.props.handleClick} user={this.props.user} handleChange={this.props.handleChange} />
+          );
+        }
+    
+      }); 
+    }
+    else {
+      productList = <center><p>No products added.</p></center>
+    }
+
+    return(
+      <div>
+        {productList}
+      </div>
+    )
   }
 }
 
