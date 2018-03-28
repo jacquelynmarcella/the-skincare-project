@@ -44,7 +44,7 @@ class Search extends Component {
           <form onSubmit={this.handleSubmit}>
             <h1>Search for a product</h1>
             <div className="searchBar">
-              <FA name="search" /> <input name="product" placeholder="e.g. Clinique Mositurizer" onChange={this.handleChange} value={this.state.product} />
+              <FA name="search" /> <input name="product" placeholder="e.g. clinique face wash" onChange={this.handleChange} value={this.state.product} />
             </div>
           </form>
         </div>

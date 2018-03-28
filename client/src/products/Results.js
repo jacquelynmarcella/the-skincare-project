@@ -10,7 +10,7 @@ class Results extends Component {
     super(props);
     this.state = {
       results: '',
-      status: 'complete',
+      status: 'loading',
       selected: ''
     }
   }
@@ -46,6 +46,10 @@ class Results extends Component {
   }
 
   componentDidUpdate() {
+    this.setState({
+      status: 'loading',
+      results: ''
+    })
     this.searchProducts();
   }
 

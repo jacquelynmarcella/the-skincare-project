@@ -116,8 +116,7 @@ class Profile extends Component {
               {this.props.user.name}
             </h1>
             <hr /> 
-            <h4>{productCount} products saved</h4>
-            <h4>{ingredientCount} ingredients flagged</h4>
+            <h4>{productCount} products saved | {ingredientCount} ingredients flagged</h4>
           </header>
 
           <div className="flex section">
@@ -137,8 +136,9 @@ class Profile extends Component {
               <ProductList products={this.state.products} category="watch" user={this.props.user} handleChange={this.handleChange} />
             </div>
 
-          </div>
           <hr />
+          </div>
+
           <div className="section">
             <h2>Flagged Ingredients</h2>
             {ingredientsTable}
