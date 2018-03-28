@@ -27,10 +27,17 @@ class Results extends Component {
         data: base.props.name  
       }).then(response => {
         console.log(response);
-        base.setState({
-          results: response.data,
-          status: 'found'
-        })
+        if(response.data === "Data source error"){
+          base.setState({
+            status: 'dataSourceError'
+          })
+        }
+        else {
+          base.setState({
+            results: response.data,
+            status: 'found'
+          })
+        }
         // To do: if length is 0 then we need to go back to search and say no results!
       }).catch(err => {
         console.log('Error:', err)
@@ -73,6 +80,13 @@ class Results extends Component {
     }
     else if(this.state.status === 'selected') {
       return <Redirect to={this.state.selected} />
+    }
+    else if(this.state.status === 'dataSourceError') {
+      return(
+        <div>
+          <p><center>There is currently an issue with our data source. Please try again later.</center></p>
+        </div>
+      );
     }
     else {
       return <Loading />

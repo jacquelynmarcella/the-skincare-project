@@ -28,7 +28,8 @@ class Search extends Component {
   handleChange = (event) => {
     //Will update location upon change of the text fields
     this.setState({ 
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
+      status: ''
     });
   }
 

@@ -46,10 +46,17 @@ class Display extends Component {
       data: base.props.match.params.cosdna
     }).then(response => {
       console.log(response,"from findProduct");
-      base.setState({
-        data: response.data
-      })
-      this.checkMatch();
+      if (response.data === "Data source error") {
+        base.setState({
+          status: 'dataSourceError'
+        })
+      }
+      else {
+        base.setState({
+          data: response.data
+        })
+        this.checkMatch();
+      }
     }).catch(err => {
       console.log('Error:', err)
     })
@@ -130,7 +137,7 @@ class Display extends Component {
          <div className="display">
           <header>
             <h1 className="title">
-              <img src="/img/product1.png" alt="Product icon" className="title-image" />
+              <img src={product1} alt="Product icon" className="title-image" />
               {this.state.data.name}
             </h1>
             <hr />
@@ -140,6 +147,14 @@ class Display extends Component {
           <IngredientTable ingredients={this.state.data.ingredients} user={this.props.user} userIngredients={this.props.userIngredients} handleFlag={this.handleFlag} tableClass="product" />
         </div>
       )
+    }
+    else if(this.state.status === "dataSourceError") {
+      return(
+        <header>
+          <h1>404</h1>
+          <p><center>There is currently an issue with our data source. Please try again later.</center></p>
+        </header>
+      );  
     }
     else {
       return <Loading />
