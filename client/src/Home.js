@@ -14,6 +14,7 @@ class Home extends Component {
   render(){
     return (
         <div>
+            <div className="background-image top"></div>
         	<header className="home">
         		<img src={threeproducts} alt="Products icon" className="title-image" />
         		<h1>SKIN/CARE</h1>
@@ -21,7 +22,7 @@ class Home extends Component {
         	</header>
         	<hr />
         	<section className="home">
-        		<p>Draw clearer connections between ingredients and products by <span className="highlight">flagging</span> ingredients you need to keep an eye on.</p>
+        		<p>Draw clearer connections between ingredients and products by <span className="highlight">flagging</span> ingredients you want to keep an eye on.</p>
         		<div className="infographic">
         			<img src={connections} alt="Connections icon" />
         		</div>
@@ -49,7 +50,7 @@ class Home extends Component {
         		<p>Just starting to try a new product, or simply want to save it to your list? Add it to your <span className="highlight">bookmarks</span> and you can move it to your favorites or failures later.</p>
         	</section>
         	<hr />
-        	<section className="home stack">
+        	<section className="home bottom stack">
         		<p>Ready to get started?</p>
         		<p><Link to="/signup" className="CTA">Sign Up</Link>
         		<Link to="/search" className="CTA">Search Products</Link></p>
