@@ -140,9 +140,7 @@ class Profile extends Component {
               <ProductList products={this.state.products} category="watch" user={this.props.user} handleChange={this.handleChange} />
             </div>
           </div>
-          <hr />
           <div className="section">
-            <h2>Flagged Ingredients</h2>
             {ingredientsTable}
           </div>
         </div>

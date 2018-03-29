@@ -7,7 +7,41 @@ import ProductAction from './ProductAction.js'
 import IngredientTable from '../ingredients/IngredientTable.js'
 import IngredientSummary from '../ingredients/IngredientSummary.js'
 
-import product1 from '../img/product1.png';
+// Product specific icons
+import productBottle from '../img/product-bottle.png';
+import productTube from '../img/product-tube.png';
+import productSerum from '../img/product-serum.png';
+import productBody from '../img/product-body.png';
+import productCompact from '../img/product-compact.png';
+import productPalette from '../img/product-palette.png';
+
+class DisplayIcon extends Component {
+  render(){
+    var icon = productBottle;
+
+    // Check if the name includes any keywords associated with icon
+    // IN PROGRESS
+    // if(['blush', 'bronzer', 'compact', 'powder'].some(substring=>this.props.name.includes(substring))){
+    //   icon = productCompact;
+    // }
+    // else if(['palette', 'quad'].some(substring=>this.props.name.includes(substring))){
+    //   icon = productPalette;
+    // }
+    // else if(['foundation', 'cream', 'face', 'facewash', 'cleanser'].some(substring=>this.props.name.includes(substring))){
+    //   icon = productBottle;
+    // }
+    // else if(['serum', 'oil'].some(substring=>this.props.name.includes(substring))){
+    //   icon = productSerum;
+    // }
+    // else if(['body', 'bodywash', 'wash'].some(substring=>this.props.name.includes(substring))){
+    //   icon = productBody;
+    // }
+
+    return (
+      <img src={icon} alt={this.props.name} className="title-image" />
+    )
+  }
+}
 
 class Display extends Component {
   constructor(props){
@@ -137,7 +171,7 @@ class Display extends Component {
          <div className="display">
           <header>
             <h1 className="title">
-              <img src={product1} alt="Product icon" className="title-image" />
+              <DisplayIcon name={this.state.data.name} />
               {this.state.data.name}
             </h1>
             <hr />
