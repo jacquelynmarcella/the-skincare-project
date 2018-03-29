@@ -62,11 +62,13 @@ h4 {
   left: 0;
   background: url('./img/background1.png') no-repeat;
   background-size: contain;
+  animation: 2s fadein ease-in;
 }
 
 .home.bottom {
   background: url('./img/background2.png') no-repeat;
   background-size: cover;
+  margin-bottom: -20px;
 }
 
 header {
@@ -271,6 +273,26 @@ section.home.stack p, section.home.stack .infographic {
 @-o-keyframes sizein {
   0%  { transform: scale(0); opacity: 0; }
   100%  { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fadein {
+  0%  { opacity: 0; }
+  100%  { opacity: 1; }
+}
+
+@-webkit-keyframes fadein {
+  0%  { opacity: 0; }
+  100%  { opacity: 1; }
+}
+
+@-moz-keyframes fadein {
+  0%  { opacity: 0; }
+  100%  { opacity: 1; }
+}
+
+@-o-keyframes fadein {
+  0%  { opacity: 0; }
+  100%  { opacity: 1; }
 }
 
 
@@ -604,13 +626,6 @@ input:focus {
     padding: 5px;
   }
 
-  .background-image.top {
-    width: 100%;
-    min-height: 100vh;
-    background: url('./img/background1.png') no-repeat;
-    background-size: cover;
-  }
-
   section.home {
     flex-direction: column;
     min-height: 70vh;
@@ -633,6 +648,18 @@ input:focus {
 
   section.home p {
     order: 1;
+  }
+
+  .background-image.top {
+    width: 100%;
+    min-height: 100vh;
+    background: url('./img/background1.png') no-repeat;
+    background-size: cover;
+  }
+
+  .home.bottom {
+    background-position: 75%;
+    margin: 0 -10px -10px -10px;
   }
 
   a.CTA {
