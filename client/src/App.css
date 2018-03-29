@@ -650,6 +650,10 @@ input:focus {
     order: 1;
   }
 
+  section.home .infographic > *:first-child, section.home .infographic > *:nth-child(2) {
+    animation: none;
+  }
+
   .background-image.top {
     width: 100%;
     min-height: 100vh;

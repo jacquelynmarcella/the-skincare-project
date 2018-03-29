@@ -51,7 +51,7 @@ class Home extends Component {
         	</section>
         	<hr />
         	<section className="home bottom stack">
-        		<p>Ready to get started?</p>
+        		<h2>Ready to get started?</h2>
         		<p><Link to="/signup" className="CTA">Sign Up</Link>
         		<Link to="/search" className="CTA">Search Products</Link></p>
         	</section>
