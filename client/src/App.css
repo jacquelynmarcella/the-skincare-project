@@ -82,7 +82,7 @@ header {
 header.home {
   overflow: hidden;
   min-height: 80vh;
-  animation: sizein 750ms ease-in;
+/*  animation: sizein 750ms ease-in;*/
 }
 
 header.home h1 {
